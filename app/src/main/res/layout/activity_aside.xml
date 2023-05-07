@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ASideActivity">
+
+    <!-- 곧도착 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/color_top_bar"
+        android:gravity="left|center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:text="곧도착"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="1.6dp"
+            android:layout_height="150dp"
+            android:background="@color/black"
+            android:src="@drawable/divider_vertical" />
+
+        <LinearLayout
+            android:id="@+id/arrival_soon_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp">
+
+            <!-- Dynamic View -->
+            <LinearLayout
+                android:id="@+id/arrival_soon_item"
+                android:layout_width="200dp"
+                android:layout_height="140dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/border"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="720-3"
+                    android:textColor="@color/black"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="140dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/border"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24"
+                    android:textColor="@color/black"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="140dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/border"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="셔틀"
+                    android:textColor="@color/black"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/divider_bold" />
+
+    <!-- 노선별 남은 시간 / 위치 or 예상 시간 / 출발 시간 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Column Labels -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="노선명"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="남은 정류장 / 시간"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="현재 위치 / 출발 시간"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/divider_bold" />
+
+        <!-- 노선별 Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="24"
+                android:textColor="@color/color_24"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:id="@+id/remaining_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="곧도착"
+                android:textColor="@color/color_arrival_soon"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:id="@+id/current_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="대지고등학교.전내교차로"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/divider_bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="720-3"
+                android:textColor="@color/color_720_3"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:id="@+id/remaining_720_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="곧도착"
+                android:textColor="@color/color_arrival_soon"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:id="@+id/current_720_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="대지고등학교.전내교차로"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/divider_bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="셔틀"
+                android:textColor="@color/color_shuttle"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:id="@+id/remaining_shuttle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="곧도착"
+                android:textColor="@color/color_arrival_soon"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="1.6dp"
+                android:layout_height="150dp"
+                android:background="@color/black"
+                android:src="@drawable/divider_vertical" />
+
+            <TextView
+                android:id="@+id/current_shuttle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="대지고등학교.전내교차로"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/divider_bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="720dp"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:text="@string/a_side_notices_left_side"
+            android:textSize="24sp" />
+
+        <!-- TO DO: 최근 업데이트 시간 업데이트 -->
+        <TextView
+            android:id="@+id/recent_refresh_timestamp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:paddingRight="40dp"
+            android:text="@string/a_side_notices_right_side"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

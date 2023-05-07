@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BusArrivalAlram</string>
+
+<!-- A side strings -->
+    <string name="a_side_arrival_soon">곧도</string>
+
+    <string name="a_side_notices_left_side">셔틀버스는 남은 정류장, 현재 위치 대신 예상 시간으로 제공됩니다.</string>
+    <string name="a_side_notices_right_side">최근 새로고침: </string>
+
+<!-- B side strings -->
+    <string name="b_side_weather_slash">/</string>
+    <string name="b_side_weather_micro_dust">미세먼지</string>
+    <string name="b_side_weather_ultra_micro_dust">초미세먼지</string>
+
+    <string name="b_side_survey_message">서비스 설문조사에\n참여해 주세요!</string>
+    <string name="b_side_app_ad_message">학교에서 버스를 자주 탄다면?\n이 앱을 써보세요!\n(안드로이드만 가능)</string>
+
+</resources>
