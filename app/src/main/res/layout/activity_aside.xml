@@ -16,9 +16,8 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dimen_width_bus_arrival_first_col"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
             android:gravity="center"
             android:text="곧도착"
             android:textColor="@color/black"
@@ -114,9 +113,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/dimen_width_bus_arrival_first_col"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
                 android:gravity="center"
                 android:text="노선명"
                 android:textColor="@color/black"
@@ -132,9 +130,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="남은 정류장 / 시간"
+                android:text="@string/a_side_current_bus_info"
                 android:textColor="@color/black"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -148,9 +146,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="현재 위치 / 출발 시간"
+                android:text="@string/a_side_next_bus_info"
                 android:textColor="@color/black"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -165,13 +163,12 @@
         <!-- 노선별 Row -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/dimen_height_bus_arrival_row"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/dimen_width_bus_arrival_first_col"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
                 android:gravity="center"
                 android:text="24"
                 android:textColor="@color/color_24"
@@ -184,16 +181,35 @@
                 android:background="@color/black"
                 android:src="@drawable/divider_vertical" />
 
-            <TextView
-                android:id="@+id/remaining_24"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:gravity="center"
-                android:text="곧도착"
-                android:textColor="@color/color_arrival_soon"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/current_arrival_time_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/color_arrival_soon"
+                    android:textSize="@dimen/dimen_a_side_top_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/current_arrival_station_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="도착 정보 없음"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_a_side_down_text"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="1.6dp"
@@ -201,16 +217,35 @@
                 android:background="@color/black"
                 android:src="@drawable/divider_vertical" />
 
-            <TextView
-                android:id="@+id/current_24"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:text="대지고등학교.전내교차로"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/next_arrival_time_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/black"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/next_arrival_station_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_a_side_down_text"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -221,13 +256,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/dimen_height_bus_arrival_row"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/dimen_width_bus_arrival_first_col"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
                 android:gravity="center"
                 android:text="720-3"
                 android:textColor="@color/color_720_3"
@@ -240,16 +274,35 @@
                 android:background="@color/black"
                 android:src="@drawable/divider_vertical" />
 
-            <TextView
-                android:id="@+id/remaining_720_3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:gravity="center"
-                android:text="곧도착"
-                android:textColor="@color/color_arrival_soon"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/current_arrival_time_720_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/color_arrival_soon"
+                    android:textSize="@dimen/dimen_a_side_top_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/current_arrival_station_720_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_a_side_down_text"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="1.6dp"
@@ -257,16 +310,35 @@
                 android:background="@color/black"
                 android:src="@drawable/divider_vertical" />
 
-            <TextView
-                android:id="@+id/current_720_3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:text="대지고등학교.전내교차로"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/next_arrival_time_720_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_a_side_top_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/next_arrival_station_720_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_a_side_down_text"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -277,13 +349,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/dimen_height_bus_arrival_row"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/dimen_width_bus_arrival_first_col"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
                 android:gravity="center"
                 android:text="셔틀"
                 android:textColor="@color/color_shuttle"
@@ -296,16 +367,24 @@
                 android:background="@color/black"
                 android:src="@drawable/divider_vertical" />
 
-            <TextView
-                android:id="@+id/remaining_shuttle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:gravity="center"
-                android:text="곧도착"
-                android:textColor="@color/color_arrival_soon"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/current_arrival_time_shuttle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/color_arrival_soon"
+                    android:textSize="@dimen/dimen_a_side_top_text"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="1.6dp"
@@ -313,16 +392,24 @@
                 android:background="@color/black"
                 android:src="@drawable/divider_vertical" />
 
-            <TextView
-                android:id="@+id/current_shuttle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:text="대지고등학교.전내교차로"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/next_arrival_time_shuttle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="곧도착"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_a_side_top_text"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

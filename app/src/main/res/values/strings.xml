@@ -2,7 +2,11 @@
     <string name="app_name">BusArrivalAlram</string>
 
 <!-- A side strings -->
-    <string name="a_side_arrival_soon">곧도</string>
+    <string name="a_side_arrival_soon">곧도착</string>
+
+    <string name="a_side_route_name">노선명</string>
+    <string name="a_side_current_bus_info">현재 버스 도착시간 / 위치</string>
+    <string name="a_side_next_bus_info">다음 버스 도착시간 / 위치</string>
 
     <string name="a_side_notices_left_side">셔틀버스는 남은 정류장, 현재 위치 대신 예상 시간으로 제공됩니다.</string>
     <string name="a_side_notices_right_side">최근 새로고침: </string>

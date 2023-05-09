@@ -1,23 +1,17 @@
 package com.example.busarrivalalram
 
-import Model.BusDataGG
 import Utils.DateTimeHandler
-import ViewModel.APIServiceGG
-import ViewModel.APIServiceShuttle
+import ViewModel.APIServiceBus
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore.Audio.Media
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -36,6 +30,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ASideActivity : AppCompatActivity() {
     val binding by lazy { ActivityAsideBinding.inflate(layoutInflater) }
+
+    // 곧도착 기준이 되는 시간 (단위: 분)
+    val arrivalSoonDetermineTime = 1
 
     // 오디오 재생을 위한 객체
     lateinit var mediaPlayer: MediaPlayer
@@ -87,26 +84,19 @@ class ASideActivity : AppCompatActivity() {
                         .baseUrl("https://2ot8ocxpaf.execute-api.ap-northeast-2.amazonaws.com/")
                         .addConverterFactory(GsonConverterFactory.create()).build()
 
-                    val apiServiceGG = retrofit.create(APIServiceGG::class.java)
-                    val apiServiceShuttle = retrofit.create(APIServiceShuttle::class.java)
+                    val apiServiceBus = retrofit.create(APIServiceBus::class.java)
 
-                    val arrivalInfo24 = apiServiceGG.getBusArrivalInfo("24")
-                    val arrivalInfo720_3 = apiServiceGG.getBusArrivalInfo("720-3")
-                    val arrivalInfoShuttle = apiServiceShuttle.getBusArrivalInfo("shuttle")
+                    val arrivalInfo24 = apiServiceBus.getBusArrivalInfo("24").checkArrival()
+                    val arrivalInfo720_3 = apiServiceBus.getBusArrivalInfo("720-3").checkArrival()
+                    val arrivalInfoShuttle =
+                        apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
 
-                    // 1-1. 요청하여 받은 값 확인
-                    Log.d(
-                        "responseResult",
-                        "${arrivalInfo24.currentStation} ${arrivalInfo24.timeRemaining}"
-                    )
 
                     // 2. 가져온 값으로 뷰 갱신하기
-                    // 2-1. 가져온 값으로 24번 항목 갱신
-                    binding.current24.text = arrivalInfo24.currentStation
-                    // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (arrivalInfo24.timeRemaining > 120) {
-                        binding.remaining24.text = "${arrivalInfo24.timeRemaining / 60} 분"
-                        binding.remaining24.setTextColor(Color.BLACK)
+                    // 2-1-1. 가져온 값으로 24번 도착 시간 항목 갱신
+                    if (arrivalInfo24.predictTime1.toInt() > arrivalSoonDetermineTime) {
+                        binding.currentArrivalTime24.text = "${arrivalInfo24.predictTime1} 분"
+                        binding.currentArrivalTime24.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("24")) {
@@ -114,9 +104,10 @@ class ASideActivity : AppCompatActivity() {
                             arrivalSoonBusNowAddedQueue.remove("24")
                         }
 
-                    } else if (arrivalInfo24.timeRemaining >= 0) {
-                        binding.remaining24.text = "곧도착"
-                        binding.remaining24.setTextColor(
+                    } else if (arrivalInfo24.predictTime1.toInt() >= 0) {
+                        // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
+                        binding.currentArrivalTime24.text = "곧도착"
+                        binding.currentArrivalTime24.setTextColor(
                             ContextCompat.getColor(
                                 this@ASideActivity, R.color.color_arrival_soon
                             )
@@ -128,18 +119,25 @@ class ASideActivity : AppCompatActivity() {
                         }
 
                     } else {
-                        binding.current24.text = "도착 정보 없음"
-                        binding.remaining24.text = "도착 정보 없음"
-                        binding.current24.setTextColor(Color.BLACK)
-                        binding.remaining24.setTextColor(Color.BLACK)
+                        binding.currentArrivalTime24.text = "도착 정보 없음"
+                        binding.currentArrivalTime24.setTextColor(Color.BLACK)
                     }
 
+                    if (arrivalInfo24.predictTime2.toInt() >= 0) {
+                        binding.nextArrivalTime24.text = "${arrivalInfo24.predictTime2} 분"
+                    } else {
+                        binding.nextArrivalTime24.text = "도착 정보 없음"
+                    }
+
+                    binding.currentArrivalStation24.text = arrivalInfo24.stationNm1
+                    binding.nextArrivalStation24.text = arrivalInfo24.stationNm2
+
+
                     // 2-2. 가져온 값으로 720-3번 항목 갱신
-                    binding.current7203.text = arrivalInfo720_3.currentStation
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (arrivalInfo720_3.timeRemaining > 120) {
-                        binding.remaining7203.text = "${arrivalInfo720_3.timeRemaining / 60} 분"
-                        binding.remaining7203.setTextColor(Color.BLACK)
+                    if (arrivalInfo720_3.predictTime1.toInt() >= arrivalSoonDetermineTime) {
+                        binding.currentArrivalTime7203.text = "${arrivalInfo720_3.predictTime1} 분"
+                        binding.currentArrivalTime7203.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("720-3")) {
@@ -147,9 +145,9 @@ class ASideActivity : AppCompatActivity() {
                             arrivalSoonBusNowAddedQueue.remove("720-3")
                         }
 
-                    } else if (arrivalInfo720_3.timeRemaining >= 0) {
-                        binding.remaining7203.text = "곧도착"
-                        binding.remaining7203.setTextColor(
+                    } else if (arrivalInfo720_3.predictTime1.toInt() >= 0) {
+                        binding.currentArrivalTime7203.text = "곧도착"
+                        binding.currentArrivalTime7203.setTextColor(
                             ContextCompat.getColor(
                                 this@ASideActivity, R.color.color_arrival_soon
                             )
@@ -161,20 +159,26 @@ class ASideActivity : AppCompatActivity() {
                         }
 
                     } else {
-                        binding.current7203.text = "도착 정보 없음"
-                        binding.remaining7203.text = "도착 정보 없음"
-                        binding.current7203.setTextColor(Color.BLACK)
-                        binding.remaining7203.setTextColor(Color.BLACK)
+                        binding.currentArrivalTime7203.text = "도착 정보 없음"
+                        binding.currentArrivalTime7203.setTextColor(Color.BLACK)
                     }
 
+                    if (arrivalInfo720_3.predictTime2.toInt() >= 0) {
+                        binding.nextArrivalTime7203.text = "${arrivalInfo720_3.predictTime2} 분"
+                    } else {
+                        binding.nextArrivalTime7203.text = "도착 정보 없음"
+                    }
+
+                    binding.currentArrivalStation7203.text = arrivalInfo720_3.stationNm1
+                    binding.nextArrivalStation7203.text = arrivalInfo720_3.stationNm2
+
+
                     // 2-3. 가져온 값으로 셔틀 항목 갱신
-                    binding.currentShuttle.text =
-                        "${arrivalInfoShuttle.estimateDepartureTime / 60} 분 전 출발 예상"
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (arrivalInfoShuttle.estimateArrivalTime > 120) {
-                        binding.remainingShuttle.text =
-                            "${arrivalInfoShuttle.estimateArrivalTime / 60} 분 후 도착 예상"
-                        binding.remainingShuttle.setTextColor(Color.BLACK)
+                    if (arrivalInfoShuttle.predictTime1.toInt() > arrivalSoonDetermineTime) {
+                        binding.currentArrivalTimeShuttle.text =
+                            "${arrivalInfoShuttle.predictTime1} 분 후 도착 예상"
+                        binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("셔틀")) {
@@ -182,9 +186,9 @@ class ASideActivity : AppCompatActivity() {
                             arrivalSoonBusNowAddedQueue.remove("셔틀")
                         }
 
-                    } else if (arrivalInfoShuttle.estimateArrivalTime >= 0) {
-                        binding.remainingShuttle.text = "곧도착 예상"
-                        binding.remainingShuttle.setTextColor(
+                    } else if (arrivalInfoShuttle.predictTime1.toInt() >= 0) {
+                        binding.currentArrivalTimeShuttle.text = "곧도착 예상"
+                        binding.currentArrivalTimeShuttle.setTextColor(
                             ContextCompat.getColor(
                                 this@ASideActivity, R.color.color_arrival_soon
                             )
@@ -196,11 +200,16 @@ class ASideActivity : AppCompatActivity() {
                         }
 
                     } else {
-                        binding.currentShuttle.text = "도착 정보 없음"
-                        binding.remainingShuttle.text = "도착 정보 없음"
-                        binding.currentShuttle.setTextColor(Color.BLACK)
-                        binding.remainingShuttle.setTextColor(Color.BLACK)
+                        binding.currentArrivalTimeShuttle.text = "도착 정보 없음"
+                        binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
                     }
+
+                    if (arrivalInfoShuttle.predictTime2.toInt() >= 0) {
+                        binding.nextArrivalTimeShuttle.text = "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
+                    } else {
+                        binding.nextArrivalTimeShuttle.text = "도착 정보 없음"
+                    }
+
 
                     // 3. 곧도착 옆 도착 예정 노선 목록 갱신
                     // * 곧도착 옆에 있는 노선이 사라지는 기준은 남은 시간이 10초 이하일 때
@@ -309,7 +318,7 @@ class ASideActivity : AppCompatActivity() {
                     }
                 }
 
-                delay(30000) // temp. actual interval time is 30000 mills
+                delay(60000) // temp. actual interval time is 60000 mills (1 min.)
             }
         }
     }
