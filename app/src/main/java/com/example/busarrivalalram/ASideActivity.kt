@@ -91,6 +91,8 @@ class ASideActivity : AppCompatActivity() {
                     val arrivalInfoShuttle =
                         apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
 
+                    Log.d("shuttledebug", arrivalInfoShuttle.toString())
+
 
                     // 2. 가져온 값으로 뷰 갱신하기
                     // 2-1-1. 가져온 값으로 24번 도착 시간 항목 갱신
