@@ -9,7 +9,6 @@ import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -90,8 +89,6 @@ class ASideActivity : AppCompatActivity() {
                     val arrivalInfo720_3 = apiServiceBus.getBusArrivalInfo("720-3").checkArrival()
                     val arrivalInfoShuttle =
                         apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
-
-                    Log.d("shuttledebug", arrivalInfoShuttle.toString())
 
 
                     // 2. 가져온 값으로 뷰 갱신하기
@@ -323,7 +320,7 @@ class ASideActivity : AppCompatActivity() {
                     }
                 }
 
-                delay(60000) // temp. actual interval time is 60000 mills (1 min.)
+                delay(45000) // temp. actual interval time is 30000 / 45000 / 60000 mills (30s / 45s / 1 min.)
             }
         }
     }
