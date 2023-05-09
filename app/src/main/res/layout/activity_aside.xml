@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+
             android:gravity="left|center"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp">
@@ -133,6 +134,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/a_side_current_bus_info"
+                android:fontFamily="@font/ibm_plex_sans_kr_medium"
                 android:textColor="@color/black"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -231,7 +233,7 @@
                     android:gravity="center"
                     android:text="곧도착"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
+                    android:textSize="@dimen/dimen_a_side_top_text"
                     android:textStyle="bold" />
 
                 <TextView

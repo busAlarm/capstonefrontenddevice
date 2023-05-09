@@ -4,8 +4,8 @@
     <dimen name="dimen_140dp">140dp</dimen>
     <dimen name="dimen_20dp">20dp</dimen>
 
-    <dimen name="dimen_a_side_top_text">40sp</dimen>
-    <dimen name="dimen_a_side_down_text">32sp</dimen>
+    <dimen name="dimen_a_side_top_text">32sp</dimen>
+    <dimen name="dimen_a_side_down_text">26sp</dimen>
 
     <dimen name="dimen_width_bus_arrival_first_col">200dp</dimen>
     <dimen name="dimen_height_bus_arrival_row">130dp</dimen>

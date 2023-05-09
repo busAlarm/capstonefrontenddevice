@@ -120,13 +120,14 @@ class ASideActivity : AppCompatActivity() {
 
                     } else {
                         binding.currentArrivalTime24.text = "도착 정보 없음"
-                        binding.currentArrivalTime24.setTextColor(Color.BLACK)
+                        binding.currentArrivalTime24.setTextColor(Color.GRAY)
                     }
 
                     if (arrivalInfo24.predictTime2.toInt() >= 0) {
                         binding.nextArrivalTime24.text = "${arrivalInfo24.predictTime2} 분"
                     } else {
                         binding.nextArrivalTime24.text = "도착 정보 없음"
+                        binding.nextArrivalTime24.setTextColor(Color.GRAY)
                     }
 
                     binding.currentArrivalStation24.text = arrivalInfo24.stationNm1
@@ -160,13 +161,14 @@ class ASideActivity : AppCompatActivity() {
 
                     } else {
                         binding.currentArrivalTime7203.text = "도착 정보 없음"
-                        binding.currentArrivalTime7203.setTextColor(Color.BLACK)
+                        binding.currentArrivalTime7203.setTextColor(Color.GRAY)
                     }
 
                     if (arrivalInfo720_3.predictTime2.toInt() >= 0) {
                         binding.nextArrivalTime7203.text = "${arrivalInfo720_3.predictTime2} 분"
                     } else {
                         binding.nextArrivalTime7203.text = "도착 정보 없음"
+                        binding.nextArrivalTime7203.setTextColor(Color.GRAY)
                     }
 
                     binding.currentArrivalStation7203.text = arrivalInfo720_3.stationNm1
@@ -201,13 +203,14 @@ class ASideActivity : AppCompatActivity() {
 
                     } else {
                         binding.currentArrivalTimeShuttle.text = "도착 정보 없음"
-                        binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
+                        binding.currentArrivalTimeShuttle.setTextColor(Color.GRAY)
                     }
 
                     if (arrivalInfoShuttle.predictTime2.toInt() >= 0) {
                         binding.nextArrivalTimeShuttle.text = "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
                     } else {
                         binding.nextArrivalTimeShuttle.text = "도착 정보 없음"
+                        binding.nextArrivalTimeShuttle.setTextColor(Color.GRAY)
                     }
 
 
