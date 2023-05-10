@@ -173,6 +173,7 @@ class ASideActivity : AppCompatActivity() {
                     } else {
                         binding.nextArrivalTime7203.text = "도착 정보 없음"
                         binding.nextArrivalTime7203.setTextColor(Color.GRAY)
+                        binding.nextArrivalStation7203.setTextColor(Color.GRAY)
                     }
 
                     binding.currentArrivalStation7203.text = arrivalInfo720_3.stationNm1
@@ -313,7 +314,7 @@ class ASideActivity : AppCompatActivity() {
                     }
 
                     // 5. 최근 새로고침 변경
-                    binding.recentRefreshTimestamp.text =
+                    binding.aSideRecentRefreshTimestamp.text =
                         "최근 새로고침: ${DateTimeHandler.getCurrentTimeStamp()}"
 
                 } catch (e: HttpException) {
@@ -332,7 +333,9 @@ class ASideActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
+        if (::mediaPlayer.isInitialized && mediaPlayer != null) {
+            mediaPlayer.stop()
+            mediaPlayer.release()
+        }
     }
 }

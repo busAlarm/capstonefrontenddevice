@@ -437,7 +437,7 @@
 
         <!-- TO DO: 최근 업데이트 시간 업데이트 -->
         <TextView
-            android:id="@+id/recent_refresh_timestamp"
+            android:id="@+id/a_side_recent_refresh_timestamp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="right|center"

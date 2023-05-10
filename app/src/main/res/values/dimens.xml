@@ -15,6 +15,7 @@
     <dimen name="dimen_b_side_time_text">40sp</dimen>
     <dimen name="dimen_b_side_message_text">32sp</dimen>
     <dimen name="dimen_b_side_message_text_long">24sp</dimen>
+    <dimen name="dimen_b_side_message_text_small">24sp</dimen>
 
 
 </resources>

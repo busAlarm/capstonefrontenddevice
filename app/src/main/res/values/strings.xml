@@ -16,6 +16,19 @@
     <string name="b_side_weather_micro_dust">미세먼지</string>
     <string name="b_side_weather_ultra_micro_dust">초미세먼지</string>
 
+    <string name="b_side_estimated_label">에서 내려 걸어갈 때 예상 도착 시간</string>
+    <string name="b_side_laboratory">종합실험동</string>
+    <string name="b_side_engineering_building_1">제1공학관</string>
+    <string name="b_side_engineering_building_2">제2공학관</string>
+    <string name="b_side_engineering_building_3">제3공학관</string>
+    <string name="b_side_international_building">국제관</string>
+    <string name="b_side_art_building">예술관</string>
+    <string name="b_side_peace_plaza">평화의광장</string>
+    <string name="b_side_humanity_building">인문관</string>
+    <string name="b_side_economy_building">상경관</string>
+    <string name="b_side_education_building">사범관</string>
+    <string name="b_side_software_building">ICT관</string>
+
     <string name="b_side_survey_message">서비스 설문조사에\n참여해 주세요!</string>
     <string name="b_side_app_ad_message">학교에서 버스를 자주 탄다면?\n이 앱을 써보세요!\n(안드로이드만 가능)</string>
 

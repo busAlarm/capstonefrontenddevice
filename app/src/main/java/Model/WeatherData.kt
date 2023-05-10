@@ -1,9 +1,9 @@
 package Model
 
 data class WeatherData(
-    val highTemp: String,
+    val minTemp: String,
     val currentTemp: String,
-    val lowTemp: String,
+    val maxTemp: String,
     val weather: String,
     val microDust: String,
     val ultraMicroDust: String

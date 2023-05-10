@@ -29,8 +29,7 @@
                 android:gravity="top"
                 android:text="2023년 5월 19일"
                 android:textColor="@color/color_24"
-                android:textSize="@dimen/dimen_b_side_date_text"
-                 />
+                android:textSize="@dimen/dimen_b_side_date_text" />
 
             <TextView
                 android:id="@+id/current_time"
@@ -232,16 +231,692 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal">
+        <!-- 좌측 하단 2/3 -->
 
         <LinearLayout
-            android:id="@+id/information_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/information_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="@string/b_side_laboratory"
+                            android:textColor="@color/color_shuttle"
+                            android:textSize="@dimen/dimen_b_side_message_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="17dp"
+                            android:text="@string/b_side_estimated_label" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_engineering_building_1"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_engineering_building_2"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_engineering_building_3"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_international_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="1.6dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/black"
+                    android:src="@drawable/divider_vertical" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="@string/b_side_peace_plaza"
+                        android:textColor="@color/color_shuttle"
+                        android:textSize="@dimen/dimen_b_side_message_text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="17dp"
+                        android:text="@string/b_side_estimated_label" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_art_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_international_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_humanity_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_economy_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_education_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="1.6dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/black"
+                    android:src="@drawable/divider_vertical" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="@string/b_side_humanity_building"
+                        android:textColor="@color/color_shuttle"
+                        android:textSize="@dimen/dimen_b_side_message_text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="17dp"
+                        android:text="@string/b_side_estimated_label" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_humanity_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_economy_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_education_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/b_side_software_building"
+                                android:textColor="@color/color_shuttle"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:text="5 분"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_b_side_message_text_small"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오후 12:39 도착"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_b_side_message_text_small"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/divider_bold" />
+
+            <TextView
+                android:id="@+id/b_side_recent_refresh_timestamp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="left|center"
+                android:text="최근 새로고침: " />
 
         </LinearLayout>
 
+
+        <!-- 좌측 하단 2/3 끝 -->
         <ImageView
             android:layout_width="1.6dp"
             android:layout_height="match_parent"

@@ -1,6 +1,7 @@
 package com.example.busarrivalalram
 
 import Model.BannerMessage
+import Model.BusData
 import Model.WeatherData
 import Utils.DateTimeHandler
 import ViewModel.APIServiceBannerMessage
@@ -42,6 +43,9 @@ class BSideActivity : AppCompatActivity() {
 
     // 날씨 변경 주기 (기본깂 3600000 -> 1시간)
     val weatherInterval: Long = 3600000
+
+    // 버스 시간 가져오는 주기 (45초)
+    val busTimeInterval: Long = 45000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,9 +104,9 @@ class BSideActivity : AppCompatActivity() {
                     val apiService = retrofit.create(APIServiceWeather::class.java)
                     val weatherData: WeatherData = apiService.getWeatherInfo()
 
-                    binding.highestTemperature.text = "${weatherData.highTemp}°"
+                    binding.highestTemperature.text = "${weatherData.maxTemp}°"
                     binding.currentTemperature.text = "${weatherData.currentTemp}°"
-                    binding.lowestTemperature.text = "${weatherData.lowTemp}°"
+                    binding.lowestTemperature.text = "${weatherData.minTemp}°"
 
                     // 공백 제거 ex) 구름 많음 -> 구름많음
                     weatherData.weather.replace(" ", "")
@@ -116,15 +120,19 @@ class BSideActivity : AppCompatActivity() {
                         "맑음" -> {
                             binding.climateImage.setImageResource(R.drawable.sun)
                         }
+
                         "구름많음" -> {
                             binding.climateImage.setImageResource(R.drawable.cloudy)
                         }
+
                         "흐림" -> {
                             binding.climateImage.setImageResource(R.drawable.clouds)
                         }
+
                         "비" -> {
                             binding.climateImage.setImageResource(R.drawable.rain)
                         }
+
                         "눈" -> {
                             binding.climateImage.setImageResource(R.drawable.snowflake)
                         }
@@ -143,15 +151,44 @@ class BSideActivity : AppCompatActivity() {
             }
         }
 
+        // 하단 배너 (좌측 기준 2/3 부분)
+        // 정류장 내릴 떄 각 건물별 기준 몇 분 정도 걸리는지,
+        // 그래서 건물 입구 기준으로 도착하는 최종 시간은 언제쯤인지 (이게 제일 좋아 보인다.)
+        /*
+        * 강의실까지 이동하는 시간, 예상 도착 시간 알려주기
+            종합실험동, 평화의광장, 인문관
+            종합실험동 : 제1공학관, 제2공학관, 제3공학관, 국제관
+            평화의광장: 예술관, 국제관, 인문관, 상경관, 사범관
+            인문관: 인문관, 상경관, 사범관, S/W관
+        * */
         CoroutineScope(Dispatchers.Main).launch {
-            // 상단 배너
-            // 2. 격려메시지
-            // 3. 날씨
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://2ot8ocxpaf.execute-api.ap-northeast-2.amazonaws.com/")
+                .addConverterFactory(GsonConverterFactory.create()).build()
+            val apiServiceBus = retrofit.create(APIServiceBus::class.java)
 
-            // 하단 배너 (좌측 기준 2/3 부분)
-            // 1. 정류장 내릴 떄 각 건물별 기준 몇 분 정도 걸리는지,
-            // 그래서 건물 입구 기준으로 도착하는 최종 시간은 언제쯤인지 (이게 제일 좋아 보인다.)
-            // 버스 도착 시간 값을 받아와야 하는데..? 람다에서 또 가져오지 뭐...
+            while (true) {
+                try {
+                    val arrivalInfo24 = apiServiceBus.getBusArrivalInfo("24").checkArrival()
+                    val arrivalInfo720_3 = apiServiceBus.getBusArrivalInfo("720-3").checkArrival()
+                    val arrivalInfoShuttle =
+                        apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
+
+
+                } catch (e: HttpException) {
+                    if (e.code() != 200) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@BSideActivity)
+                        toast.setText("${e.code()}")
+                        toast.show()
+                    }
+                }
+
+                binding.bSideRecentRefreshTimestamp.text =
+                    "최근 새로고침: ${DateTimeHandler.getCurrentTimeStamp()}"
+
+                delay(busTimeInterval)
+            }
 
             // 종합실험동 하차 시
             // (24, 720-3, 셔틀에서 하차)
