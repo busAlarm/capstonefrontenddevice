@@ -4,9 +4,17 @@
     <dimen name="dimen_140dp">140dp</dimen>
     <dimen name="dimen_20dp">20dp</dimen>
 
+    <!-- A Side -->
     <dimen name="dimen_a_side_top_text">32sp</dimen>
     <dimen name="dimen_a_side_down_text">26sp</dimen>
-
     <dimen name="dimen_width_bus_arrival_first_col">200dp</dimen>
     <dimen name="dimen_height_bus_arrival_row">130dp</dimen>
+
+    <!-- B Side -->
+    <dimen name="dimen_b_side_date_text">32sp</dimen>
+    <dimen name="dimen_b_side_time_text">40sp</dimen>
+    <dimen name="dimen_b_side_message_text">32sp</dimen>
+    <dimen name="dimen_b_side_message_text_long">24sp</dimen>
+
+
 </resources>

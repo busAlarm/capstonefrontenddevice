@@ -25,19 +25,20 @@
             <TextView
                 android:id="@+id/current_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="top"
                 android:text="2023년 5월 19일"
                 android:textColor="@color/color_24"
-                android:textSize="32sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/dimen_b_side_date_text"
+                 />
 
             <TextView
                 android:id="@+id/current_time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:text="오후 12:34"
                 android:textColor="@color/color_shuttle"
-                android:textSize="40sp"
+                android:textSize="@dimen/dimen_b_side_time_text"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -62,8 +63,7 @@
                 android:text="오늘도 화이팅!\n(현재 시범 운영중입니다.)"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/dimen_b_side_message_text" />
 
         </LinearLayout>
 
@@ -89,15 +89,16 @@
 
                 <ImageView
                     android:id="@+id/climate_image"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="14dp"
                     android:src="@drawable/cloudy" />
 
                 <TextView
                     android:id="@+id/highest_temperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="10dp"
                     android:text="24°"
                     android:textAlignment="center"
                     android:textColor="@color/color_highest_celsius"
@@ -115,10 +116,30 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/current_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24°"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/b_side_weather_slash"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/lowest_temperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="10dp"
                     android:text="18°"
                     android:textAlignment="center"
                     android:textColor="@color/color_lowest_celsius"
@@ -132,8 +153,7 @@
                     android:text="맑음"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
+                    android:textSize="28sp" />
 
             </LinearLayout>
 
@@ -141,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingTop="10dp">
+                android:paddingTop="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -153,11 +173,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="12dp"
                         android:text="@string/b_side_weather_micro_dust"
                         android:textColor="@color/black"
-                        android:textSize="28sp"
-                        android:textStyle="bold" />
+                        android:textSize="28sp" />
 
                     <TextView
                         android:id="@+id/micro_dust_index"
@@ -183,8 +202,7 @@
                         android:layout_marginRight="10dp"
                         android:text="@string/b_side_weather_ultra_micro_dust"
                         android:textColor="@color/black"
-                        android:textSize="28sp"
-                        android:textStyle="bold" />
+                        android:textSize="28sp" />
 
                     <TextView
                         android:id="@+id/ultra_micro_dust_index"
@@ -219,7 +237,8 @@
             android:id="@+id/information_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
         </LinearLayout>
 
@@ -245,12 +264,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:text="@string/b_side_survey_message"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="24sp" />
 
                 <ImageView
                     android:layout_width="200dp"
@@ -274,12 +291,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:text="@string/b_side_app_ad_message"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="24sp" />
 
 
                 <ImageView
