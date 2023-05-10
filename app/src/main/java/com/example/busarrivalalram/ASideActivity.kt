@@ -96,6 +96,7 @@ class ASideActivity : AppCompatActivity() {
                     if (arrivalInfo24.predictTime1.toInt() > arrivalSoonDetermineTime) {
                         binding.currentArrivalTime24.text = "${arrivalInfo24.predictTime1} 분"
                         binding.currentArrivalTime24.setTextColor(Color.BLACK)
+                        binding.currentArrivalStation24.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("24")) {
@@ -120,6 +121,7 @@ class ASideActivity : AppCompatActivity() {
                     } else {
                         binding.currentArrivalTime24.text = "도착 정보 없음"
                         binding.currentArrivalTime24.setTextColor(Color.GRAY)
+                        binding.currentArrivalStation24.setTextColor(Color.GRAY)
                     }
 
                     if (arrivalInfo24.predictTime2.toInt() >= 0) {
@@ -127,6 +129,7 @@ class ASideActivity : AppCompatActivity() {
                     } else {
                         binding.nextArrivalTime24.text = "도착 정보 없음"
                         binding.nextArrivalTime24.setTextColor(Color.GRAY)
+                        binding.nextArrivalStation24.setTextColor(Color.GRAY)
                     }
 
                     binding.currentArrivalStation24.text = arrivalInfo24.stationNm1
@@ -138,6 +141,7 @@ class ASideActivity : AppCompatActivity() {
                     if (arrivalInfo720_3.predictTime1.toInt() >= arrivalSoonDetermineTime) {
                         binding.currentArrivalTime7203.text = "${arrivalInfo720_3.predictTime1} 분"
                         binding.currentArrivalTime7203.setTextColor(Color.BLACK)
+                        binding.currentArrivalStation7203.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("720-3")) {
@@ -161,6 +165,7 @@ class ASideActivity : AppCompatActivity() {
                     } else {
                         binding.currentArrivalTime7203.text = "도착 정보 없음"
                         binding.currentArrivalTime7203.setTextColor(Color.GRAY)
+                        binding.currentArrivalStation7203.setTextColor(Color.GRAY)
                     }
 
                     if (arrivalInfo720_3.predictTime2.toInt() >= 0) {
