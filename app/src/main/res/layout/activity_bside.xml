@@ -250,7 +250,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -298,6 +298,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_engineering_building_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -309,6 +310,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_engineering_building_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -341,6 +343,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_engineering_building_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -352,6 +355,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_engineering_building_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -384,6 +388,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_engineering_building_3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -395,6 +400,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_engineering_building_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -427,6 +433,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_international_building_from_lab"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -438,6 +445,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_international_building_from_lab"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -459,7 +467,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:orientation="vertical">
 
                     <TextView
@@ -487,36 +495,210 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="@string/b_side_art_building"
-                                android:textColor="@color/color_shuttle"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="5 분"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_humanity_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_humanity_building_from_plaza"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_humanity_building_from_plaza"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_fine_art_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_fine_art_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_fine_art_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
 
                         </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="오후 12:39 도착"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_economy_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_economy_building_from_plaza"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_economy_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_gym_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_gym_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_gym_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -530,36 +712,101 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="@string/b_side_international_building"
-                                android:textColor="@color/color_shuttle"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="5 분"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_education_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_education_building_from_plaza"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_education_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_rotc_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_rotc_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_rotc_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
 
                         </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="오후 12:39 도착"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -573,36 +820,101 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="@string/b_side_humanity_building"
-                                android:textColor="@color/color_shuttle"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="5 분"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_international_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_international_building_from_plaza"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_international_building_from_plaza"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_music_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_music_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_music_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
 
                         </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="오후 12:39 도착"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -616,79 +928,101 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="@string/b_side_economy_building"
-                                android:textColor="@color/color_shuttle"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="5 분"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_law_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_law_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_law_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="@string/b_side_dance_building"
+                                        android:textColor="@color/color_shuttle"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/walking_elapsed_time_to_dance_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginRight="10dp"
+                                        android:text="5 분"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_b_side_message_text_small"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/estimated_arrival_time_to_dance_building"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="오후 12:39 도착"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_b_side_message_text_small"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
 
                         </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="오후 12:39 도착"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="@string/b_side_education_building"
-                                android:textColor="@color/color_shuttle"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:layout_marginRight="10dp"
-                                android:text="5 분"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_b_side_message_text_small"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="오후 12:39 도착"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -706,7 +1040,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:orientation="vertical">
 
                     <TextView
@@ -747,6 +1081,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_humanity_building_from_human"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -758,6 +1093,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_humanity_building_from_human"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -790,6 +1126,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_economy_building_from_human"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -801,6 +1138,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_economy_building_from_human"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -833,6 +1171,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_education_building_from_human"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -844,6 +1183,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_education_building_from_human"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -876,6 +1216,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/walking_elapsed_time_to_ict_building"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
                                 android:layout_marginRight="10dp"
@@ -887,6 +1228,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/estimated_arrival_time_to_ict_building"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오후 12:39 도착"
@@ -905,77 +1247,24 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/divider_bold" />
 
-            <TextView
-                android:id="@+id/b_side_recent_refresh_timestamp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:gravity="left|center"
-                android:text="최근 새로고침: " />
+                android:gravity="right|center"
+                android:orientation="horizontal">
 
-        </LinearLayout>
-
-
-        <!-- 좌측 하단 2/3 끝 -->
-        <ImageView
-            android:layout_width="1.6dp"
-            android:layout_height="match_parent"
-            android:background="@color/black"
-            android:src="@drawable/divider_vertical" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                <!-- 새로고침 시간 될 때 로딩 아이콘 삽입 -->
+                <ImageView
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
 
                 <TextView
+                    android:id="@+id/b_side_recent_refresh_timestamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/b_side_survey_message"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
-
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/qr_code_dummy" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/divider_bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/b_side_app_ad_message"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
-
-
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/qr_code_dummy" />
+                    android:layout_marginRight="16dp"
+                    android:text="최근 새로고침: 2023-05-19 09:20:45" />
 
             </LinearLayout>
 
