@@ -25,4 +25,16 @@ object DateTimeHandler {
         val formatter = DateTimeFormatter.ofPattern("a hh:mm")
         return now.format(formatter) // "오후 12:34"
     }
+
+    // 현재 시간의 시, 분을 분으로 계산하여 반환
+    fun getCurrentTimeAsMinute(): Int {
+        val now = LocalTime.now()
+        return now.hour * 60 + now.minute
+    }
+
+    fun convertMinuteToHMFormat(minute: Int): String {
+        val hour = minute / 60
+        val minute = minute % 60
+        return "${hour}:${minute}"
+    }
 }

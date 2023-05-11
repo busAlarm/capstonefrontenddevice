@@ -126,6 +126,8 @@ class ASideActivity : AppCompatActivity() {
 
                     if (arrivalInfo24.predictTime2.toInt() >= 0) {
                         binding.nextArrivalTime24.text = "${arrivalInfo24.predictTime2} 분"
+                        binding.nextArrivalTime24.setTextColor(Color.BLACK)
+                        binding.nextArrivalStation24.setTextColor(Color.BLACK)
                     } else {
                         binding.nextArrivalTime24.text = "도착 정보 없음"
                         binding.nextArrivalTime24.setTextColor(Color.GRAY)
@@ -170,6 +172,8 @@ class ASideActivity : AppCompatActivity() {
 
                     if (arrivalInfo720_3.predictTime2.toInt() >= 0) {
                         binding.nextArrivalTime7203.text = "${arrivalInfo720_3.predictTime2} 분"
+                        binding.nextArrivalTime7203.setTextColor(Color.BLACK)
+                        binding.nextArrivalStation7203.setTextColor(Color.BLACK)
                     } else {
                         binding.nextArrivalTime7203.text = "도착 정보 없음"
                         binding.nextArrivalTime7203.setTextColor(Color.GRAY)
@@ -213,6 +217,7 @@ class ASideActivity : AppCompatActivity() {
 
                     if (arrivalInfoShuttle.predictTime2.toInt() >= 0) {
                         binding.nextArrivalTimeShuttle.text = "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
+                        binding.nextArrivalTimeShuttle.setTextColor(Color.BLACK)
                     } else {
                         binding.nextArrivalTimeShuttle.text = "도착 정보 없음"
                         binding.nextArrivalTimeShuttle.setTextColor(Color.GRAY)

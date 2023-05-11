@@ -254,6 +254,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -261,7 +262,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
-                            android:layout_marginLeft="16dp"
                             android:text="@string/b_side_laboratory"
                             android:textColor="@color/color_shuttle"
                             android:textSize="@dimen/dimen_b_side_message_text"
@@ -270,7 +270,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="17dp"
                             android:text="@string/b_side_estimated_label" />
 
                     </LinearLayout>
@@ -470,20 +469,32 @@
                     android:layout_weight="2"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="16dp"
-                        android:text="@string/b_side_peace_plaza"
-                        android:textColor="@color/color_shuttle"
-                        android:textSize="@dimen/dimen_b_side_message_text"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="17dp"
-                        android:text="@string/b_side_estimated_label" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="@string/b_side_peace_plaza"
+                            android:textColor="@color/color_shuttle"
+                            android:textSize="@dimen/dimen_b_side_message_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="17dp"
+                            android:text="@string/b_side_estimated_label" />
+
+                    </LinearLayout>
+
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1043,20 +1054,26 @@
                     android:layout_weight="3"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="16dp"
-                        android:text="@string/b_side_humanity_building"
-                        android:textColor="@color/color_shuttle"
-                        android:textSize="@dimen/dimen_b_side_message_text"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="17dp"
-                        android:text="@string/b_side_estimated_label" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:text="@string/b_side_humanity_building"
+                            android:textColor="@color/color_shuttle"
+                            android:textSize="@dimen/dimen_b_side_message_text"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/b_side_estimated_label" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

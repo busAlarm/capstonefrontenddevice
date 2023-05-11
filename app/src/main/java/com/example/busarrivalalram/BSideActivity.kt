@@ -151,7 +151,7 @@ class BSideActivity : AppCompatActivity() {
             }
         }
 
-        // 하단 배너 (좌측 기준 2/3 부분)
+        // 하단
         // 정류장 내릴 떄 각 건물별 기준 몇 분 정도 걸리는지,
         // 그래서 건물 입구 기준으로 도착하는 최종 시간은 언제쯤인지 (이게 제일 좋아 보인다.)
         /*
@@ -162,10 +162,37 @@ class BSideActivity : AppCompatActivity() {
             인문관: 인문관, 상경관, 사범관, S/W관
         * */
         CoroutineScope(Dispatchers.Main).launch {
+            val nowTime = DateTimeHandler.getCurrentTime()
+
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://2ot8ocxpaf.execute-api.ap-northeast-2.amazonaws.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             val apiServiceBus = retrofit.create(APIServiceBus::class.java)
+
+
+            // 변경 시간 반영 - 걸어서 각 건물에 도착하는 데 걸리는 시간
+            binding.walkingElapsedTimeToEngineeringBuilding1.text = "1 분"
+            binding.walkingElapsedTimeToEngineeringBuilding2.text = "1 분"
+            binding.walkingElapsedTimeToEngineeringBuilding3.text = "2 분"
+            binding.walkingElapsedTimeToInternationalBuildingFromLab.text = "3 분"
+
+            binding.walkingElapsedTimeToHumanityBuildingFromPlaza.text = "4 분"
+            binding.walkingElapsedTimeToEconomyBuildingFromPlaza.text = "5 분"
+            binding.walkingElapsedTimeToEducationBuildingFromPlaza.text = "6 분"
+            binding.walkingElapsedTimeToInternationalBuildingFromPlaza.text = "2 분"
+            binding.walkingElapsedTimeToLawBuilding.text = "2 분"
+            binding.walkingElapsedTimeToFineArtBuilding.text = "3 분"
+            binding.walkingElapsedTimeToGymBuilding.text = "5 분"
+            binding.walkingElapsedTimeToRotcBuilding.text = "5 분"
+            binding.walkingElapsedTimeToMusicBuilding.text = "2 분"
+            binding.walkingElapsedTimeToDanceBuilding.text = "8 분"
+
+            binding.walkingElapsedTimeToHumanityBuildingFromHuman.text = "1 분"
+            binding.walkingElapsedTimeToEconomyBuildingFromHuman.text = "1 분"
+            binding.walkingElapsedTimeToEducationBuildingFromHuman.text = "2 분"
+            binding.walkingElapsedTimeToIctBuilding.text = "1 분"
+
+
 
             while (true) {
                 try {
