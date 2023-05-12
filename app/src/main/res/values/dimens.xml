@@ -3,6 +3,7 @@
     <dimen name="dimen_200dp">200dp</dimen>
     <dimen name="dimen_140dp">140dp</dimen>
     <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
 
     <!-- A Side -->
     <dimen name="dimen_a_side_top_text">48sp</dimen>
@@ -14,10 +15,12 @@
     <dimen name="dimen_b_side_weather_text">28sp</dimen>
     <dimen name="dimen_b_side_date_text">32sp</dimen>
     <dimen name="dimen_b_side_time_text">40sp</dimen>
-    <dimen name="dimen_b_side_message_text">32sp</dimen>
 
+    <dimen name="dimen_b_side_message_text">32sp</dimen>
     <dimen name="dimen_b_side_message_text_big">40sp</dimen>
     <dimen name="dimen_b_side_message_text_small">20sp</dimen>
+
+    <dimen name="dimen_b_side_schedule_date">100dp</dimen>
 
     <dimen name="dimen_b_side_ad_view_height">70dp</dimen>
 

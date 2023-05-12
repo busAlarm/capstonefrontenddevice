@@ -30,8 +30,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ASideActivity : AppCompatActivity() {
     val binding by lazy { ActivityAsideBinding.inflate(layoutInflater) }
 
+    // 버스 도착 시간 갱신 주기 (30초)
+    val busTimeInterval: Long = 30 * 1000
+
     // 곧도착 기준이 되는 시간 (단위: 분)
     val arrivalSoonDetermineTime = 2
+
+    // 요청 재시도 시간
+    val requestRetryTime: Long = 5000
 
     // 오디오 재생을 위한 객체
     lateinit var mediaPlayer: MediaPlayer
@@ -41,6 +47,9 @@ class ASideActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(binding.root)
+
+        // progress bar 숨기기
+        binding.progressCircular.visibility = View.GONE
 
         // title bar 가리기
         supportActionBar?.hide()
@@ -78,6 +87,9 @@ class ASideActivity : AppCompatActivity() {
 
             while (true) {
                 try {
+                    // Progressbar 보이기
+                    binding.progressCircular.visibility = View.VISIBLE
+
                     // 1. API에 요청하여 값 가져오기
                     val retrofit = Retrofit.Builder()
                         .baseUrl("https://2ot8ocxpaf.execute-api.ap-northeast-2.amazonaws.com/")
@@ -216,7 +228,8 @@ class ASideActivity : AppCompatActivity() {
                     }
 
                     if (arrivalInfoShuttle.predictTime2.toInt() >= 0) {
-                        binding.nextArrivalTimeShuttle.text = "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
+                        binding.nextArrivalTimeShuttle.text =
+                            "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
                         binding.nextArrivalTimeShuttle.setTextColor(Color.BLACK)
                     } else {
                         binding.nextArrivalTimeShuttle.text = "도착 정보 없음"
@@ -326,21 +339,28 @@ class ASideActivity : AppCompatActivity() {
                     if (e.code() != 200) {
                         // API 연결 오류 시 Toast 출력
                         val toast = Toast(this@ASideActivity)
-                        toast.setText("${e.code()}")
+                        toast.setText("${e.code()}, ${e.message()}")
                         toast.show()
+
+                        delay(requestRetryTime)
+                        continue
                     }
                 }
 
-                delay(30000) // temp. actual interval time is 30000 / 45000 / 60000 mills (30s / 45s / 1 min.)
+                // Progressbar 숨기기
+                binding.progressCircular.visibility = View.GONE
+
+                // 다음 요청 시간까지 대기
+                delay(busTimeInterval)
             }
         }
     }
 
     override fun onStop() {
-        super.onStop()
-        if (::mediaPlayer.isInitialized && mediaPlayer != null) {
-            mediaPlayer?.stop()
-            mediaPlayer?.release()
+        if (::mediaPlayer.isInitialized) {
+            mediaPlayer.stop()
+            mediaPlayer.release()
         }
+        super.onStop()
     }
 }

@@ -26,6 +26,22 @@ object DateTimeHandler {
         return now.format(formatter) // "오후 12:34"
     }
 
+    fun getThisMonth(): Int {
+        return LocalDate.now().month.value
+    }
+
+    fun getNextMonth(): Int {
+        var month = LocalDate.now().month.value
+
+        if (month == 12) {
+            month = 1
+        } else {
+            month += 1
+        }
+
+        return month
+    }
+
     // 현재 시간의 시, 분을 분으로 계산하여 반환
     fun getCurrentTimeAsMinute(): Int {
         val now = LocalTime.now()
