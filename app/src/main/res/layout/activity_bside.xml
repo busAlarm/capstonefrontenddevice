@@ -32,7 +32,7 @@
                     android:id="@+id/current_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:text="2023년 5월 19일"
                     android:textColor="@color/color_24"
                     android:textSize="@dimen/dimen_b_side_date_text" />
@@ -98,6 +98,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center"
                 android:orientation="horizontal"
@@ -176,8 +177,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingTop="2dp">
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -286,8 +286,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -312,8 +311,7 @@
                             android:layout_marginRight="8dp"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -337,8 +335,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -362,8 +359,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -387,8 +383,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -412,8 +407,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -437,8 +431,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -462,8 +455,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -521,8 +513,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -546,8 +537,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -571,8 +561,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -596,8 +585,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -621,8 +609,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -646,8 +633,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -671,8 +657,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -696,8 +681,7 @@
                             android:layout_height="wrap_content"
                             android:text="5월 19일"
                             android:textColor="@color/color_shuttle"
-                            android:textSize="@dimen/dimen_b_side_message_text_small"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/dimen_b_side_message_text_small" />
 
                         <TextView
                             android:layout_width="match_parent"
