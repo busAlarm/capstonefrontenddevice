@@ -202,6 +202,15 @@ class BSideActivity : AppCompatActivity() {
                         apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
 
 
+                    // 1. 버스 예상 도착시간 계산 (가장 먼저 오는 경우)
+                    // 종합실험동, 평화의광장은 24, 720-3, 셔틀 중 가장 먼저 오는 시간 기준으로
+                    // 인문관은 720-3 도착 시간으로 계산한다.
+
+                    // 2. 버스 예상 도착시간 + 걸어가는 데 걸리는 시간 계산
+
+                    // 3. 2번에서 구한 값을 뷰에 반영
+
+
                 } catch (e: HttpException) {
                     if (e.code() != 200) {
                         // API 연결 오류 시 Toast 출력

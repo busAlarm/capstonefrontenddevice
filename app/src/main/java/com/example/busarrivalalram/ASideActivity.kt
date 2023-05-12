@@ -31,7 +31,7 @@ class ASideActivity : AppCompatActivity() {
     val binding by lazy { ActivityAsideBinding.inflate(layoutInflater) }
 
     // 곧도착 기준이 되는 시간 (단위: 분)
-    val arrivalSoonDetermineTime = 1
+    val arrivalSoonDetermineTime = 2
 
     // 오디오 재생을 위한 객체
     lateinit var mediaPlayer: MediaPlayer
@@ -331,7 +331,7 @@ class ASideActivity : AppCompatActivity() {
                     }
                 }
 
-                delay(45000) // temp. actual interval time is 30000 / 45000 / 60000 mills (30s / 45s / 1 min.)
+                delay(30000) // temp. actual interval time is 30000 / 45000 / 60000 mills (30s / 45s / 1 min.)
             }
         }
     }
@@ -339,8 +339,8 @@ class ASideActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         if (::mediaPlayer.isInitialized && mediaPlayer != null) {
-            mediaPlayer.stop()
-            mediaPlayer.release()
+            mediaPlayer?.stop()
+            mediaPlayer?.release()
         }
     }
 }
