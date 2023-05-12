@@ -269,6 +269,7 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:id="@+id/campus_schedule_this_month_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -503,6 +504,7 @@
 
                 <!-- Item View -->
                 <LinearLayout
+                    android:id="@+id/campus_schedule_next_month_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
