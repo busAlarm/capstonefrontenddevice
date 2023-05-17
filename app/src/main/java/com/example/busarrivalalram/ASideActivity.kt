@@ -16,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.example.busarrivalalram.databinding.ActivityAsideBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,8 +37,11 @@ class ASideActivity : AppCompatActivity() {
     // 요청 재시도 시간
     val requestRetryTime: Long = 5000
 
+    // 상단 곧도착 노선 뷰에 들어갈 폰트
+    private val font = R.font.ibm_plex_sans_kr_medium
+
     // 오디오 재생을 위한 객체
-    lateinit var mediaPlayer: MediaPlayer
+    private lateinit var mediaPlayer: MediaPlayer
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -243,7 +247,7 @@ class ASideActivity : AppCompatActivity() {
 
                         var busArrivalItemLayout = LinearLayout(this@ASideActivity).apply {
                             layoutParams = LinearLayout.LayoutParams(
-                                resources.getDimensionPixelSize(R.dimen.dimen_200dp),
+                                resources.getDimensionPixelSize(R.dimen.dimen_220dp),
                                 resources.getDimensionPixelSize(R.dimen.dimen_140dp)
                             ).apply {
                                 marginStart = resources.getDimensionPixelSize(R.dimen.dimen_20dp)
@@ -255,9 +259,12 @@ class ASideActivity : AppCompatActivity() {
 
                         var busArrivalItemView = TextView(this@ASideActivity).apply {
                             text = addedBusName
-                            textSize = 50F
+                            textSize = 60F
                             setTextColor(Color.BLACK)
                             setTypeface(typeface, Typeface.BOLD)
+
+                            val appFont = ResourcesCompat.getFont(this@ASideActivity, font)
+                            typeface = appFont
                         }
 
                         busArrivalItemLayout.addView(busArrivalItemView)
