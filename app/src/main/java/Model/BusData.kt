@@ -16,7 +16,8 @@ data class BusData(
     var predictTime1: String,
     var stationNm1: String,
     var predictTime2: String,
-    var stationNm2: String
+    var stationNm2: String,
+    var arrivalSoon: Boolean
 ) {
     fun checkArrival(): BusData {
         if (predictTime1 == "") {

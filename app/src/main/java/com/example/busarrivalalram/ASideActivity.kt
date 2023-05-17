@@ -33,9 +33,6 @@ class ASideActivity : AppCompatActivity() {
     // 버스 도착 시간 갱신 주기 (30초)
     val busTimeInterval: Long = 30 * 1000
 
-    // 곧도착 기준이 되는 시간 (단위: 분)
-    val arrivalSoonDetermineTime = 2
-
     // 요청 재시도 시간
     val requestRetryTime: Long = 5000
 
@@ -105,7 +102,7 @@ class ASideActivity : AppCompatActivity() {
 
                     // 2. 가져온 값으로 뷰 갱신하기
                     // 2-1-1. 가져온 값으로 24번 도착 시간 항목 갱신
-                    if (arrivalInfo24.predictTime1.toInt() > arrivalSoonDetermineTime) {
+                    if (!arrivalInfo24.arrivalSoon) {
                         binding.currentArrivalTime24.text = "${arrivalInfo24.predictTime1} 분"
                         binding.currentArrivalTime24.setTextColor(Color.BLACK)
                         binding.currentArrivalStation24.setTextColor(Color.BLACK)
@@ -152,7 +149,7 @@ class ASideActivity : AppCompatActivity() {
 
                     // 2-2. 가져온 값으로 720-3번 항목 갱신
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (arrivalInfo720_3.predictTime1.toInt() >= arrivalSoonDetermineTime) {
+                    if (!arrivalInfo720_3.arrivalSoon) {
                         binding.currentArrivalTime7203.text = "${arrivalInfo720_3.predictTime1} 분"
                         binding.currentArrivalTime7203.setTextColor(Color.BLACK)
                         binding.currentArrivalStation7203.setTextColor(Color.BLACK)
@@ -198,7 +195,7 @@ class ASideActivity : AppCompatActivity() {
 
                     // 2-3. 가져온 값으로 셔틀 항목 갱신
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (arrivalInfoShuttle.predictTime1.toInt() > arrivalSoonDetermineTime) {
+                    if (!arrivalInfoShuttle.arrivalSoon) {
                         binding.currentArrivalTimeShuttle.text =
                             "${arrivalInfoShuttle.predictTime1} 분 후 도착 예상"
                         binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
