@@ -76,7 +76,7 @@
                 android:id="@+id/banner_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="오늘도 화이팅!\n(현재 시범 운영중입니다.)"
+                android:text="-"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen_b_side_message_text" />
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="24°"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textColor="@color/color_highest_celsius"
                     android:textSize="@dimen/dimen_b_side_weather_text"
@@ -136,7 +136,7 @@
                     android:id="@+id/current_temperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="24°"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen_b_side_weather_text"
@@ -157,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="18°"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textColor="@color/color_lowest_celsius"
                     android:textSize="@dimen/dimen_b_side_weather_text"
@@ -167,7 +167,7 @@
                     android:id="@+id/climate_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="맑음"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen_b_side_weather_text" />
@@ -198,7 +198,7 @@
                         android:id="@+id/micro_dust_index"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="93"
+                        android:text="-"
                         android:textColor="@color/color_micro_dust_index"
                         android:textSize="@dimen/dimen_b_side_weather_text"
                         android:textStyle="bold" />
@@ -224,7 +224,7 @@
                         android:id="@+id/ultra_micro_dust_index"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="28"
+                        android:text="-"
                         android:textColor="@color/color_ultra_micro_dust_index"
                         android:textSize="@dimen/dimen_b_side_weather_text"
                         android:textStyle="bold" />
@@ -359,7 +359,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="top|center"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:paddingTop="16dp">
 
@@ -368,45 +368,84 @@
                     android:layout_height="@dimen/dimen_b_side_ad_view_height"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
-                    android:text="@string/b_side_survey_message"
+                    android:text="@string/b_side_team_name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen_b_side_message_text_small" />
 
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/qr_code_dummy" />
+                    android:layout_height="@dimen/dimen_b_side_ad_view_height"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/b_side_announcement"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_b_side_message_text_small" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_b_side_ad_view_height"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/b_side_survey_ready_message"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_b_side_message_text_small" />
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/qr_code_dummy" />-->
 
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/divider_bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="top|center"
-                android:orientation="vertical"
-                android:paddingTop="16dp">
+                android:layout_height="@dimen/dimen_footer_layout_height"
+                android:gravity="bottom|right"
+                android:orientation="vertical">
 
                 <TextView
+                    android:text="@string/version_info"
+                    android:paddingRight="@dimen/dimen_20dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_b_side_ad_view_height"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/b_side_app_ad_message"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimen_b_side_message_text_small" />
+                    android:layout_height="wrap_content"/>
 
-                <ImageView
+                <TextView
+                    android:text="@string/build_date"
+                    android:paddingRight="@dimen/dimen_20dp"
+                    android:gravity="right"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/qr_code_dummy" />
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/divider_bold" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="top|center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:paddingTop="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="@dimen/dimen_b_side_ad_view_height"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/b_side_app_ad_message"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="@dimen/dimen_b_side_message_text_small" />-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/qr_code_dummy" />-->
+
+<!--            </LinearLayout>-->
 
         </LinearLayout>
 

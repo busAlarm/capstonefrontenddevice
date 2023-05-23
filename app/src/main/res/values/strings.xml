@@ -37,7 +37,14 @@
     <string name="b_side_this_month_schedule">이번 달 학사일정</string>
     <string name="b_side_next_month_schedule">다음 달 학사일정</string>
 
+    <string name="b_side_team_name">Team iteration</string>
+    <string name="b_side_announcement">LINC+사업단 캡스톤디자인 지원사업의 일환으로\n개발 중이며, 현재 테스트 진행중입니다.\n\n시연 기간: 5월 23일 (화) ~ 6월 말 (예정)</string>
+    <string name="b_side_survey_ready_message">서비스 설문조사 준비 중입니다.</string>
+
     <string name="b_side_survey_message">서비스 설문조사에 참여해 주세요!</string>
     <string name="b_side_app_ad_message">학교에서 버스를 자주 탄다면? 이 앱을 써보세요!\n(안드로이드만 가능)</string>
+
+    <string name="version_info">버전 v0.9</string>
+    <string name="build_date">빌드일자 2023-05-24</string>
 
 </resources>

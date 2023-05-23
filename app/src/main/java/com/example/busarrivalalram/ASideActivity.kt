@@ -9,6 +9,8 @@ import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.system.ErrnoException
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -41,7 +43,14 @@ class ASideActivity : AppCompatActivity() {
     private val font = R.font.ibm_plex_sans_kr_medium
 
     // 오디오 재생을 위한 객체
-    private lateinit var mediaPlayer: MediaPlayer
+    private var mediaPlayer: MediaPlayer? = null
+    private var isMediaPlayerReleased = false
+
+    // 곧도착 버스 목록 큐 (24, 720-3, 셔틀)
+    val arrivalSoonBusQueue: ArrayDeque<String> = ArrayDeque()
+
+    // 현재 뷰에 추가된 버스 목록 큐
+    val arrivalSoonBusNowAddedQueue: ArrayDeque<String> = ArrayDeque()
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +70,9 @@ class ASideActivity : AppCompatActivity() {
 
         // 곧도착 옆 모든 자식 뷰 삭제
         val busArrivalLayoutGroup = binding.arrivalSoonLayout
-        busArrivalLayoutGroup.removeAllViews()
+        busArrivalLayoutGroup?.removeAllViews()
         val busArrivalItemLayout = binding.arrivalSoonItem
-        busArrivalItemLayout.removeAllViews()
+        busArrivalItemLayout?.removeAllViews()
 
         // GlobalScope를 사용하는 것이 적합하다.
         // 앱이 실행되는 내내 반복적인 작업을 수행할 때 사용하기 때문이다.
@@ -81,10 +90,7 @@ class ASideActivity : AppCompatActivity() {
         // GlobalScope에서 돌아가는 코드는 백그라운드 스레드에서 돌아가는 코드다.
         // 따라서, 뷰를 건드리는 코드를 GlobalScope 안에 넣으면 안 된다.
         CoroutineScope(Dispatchers.Main).launch {
-            // 곧도착 버스 목록 큐 (24, 720-3, 셔틀)
-            val arrivalSoonBusQueue: ArrayDeque<String> = ArrayDeque()
-            // 현재 뷰에 추가된 버스 목록 큐
-            val arrivalSoonBusNowAddedQueue: ArrayDeque<String> = ArrayDeque()
+
 
             while (true) {
                 try {
@@ -103,17 +109,20 @@ class ASideActivity : AppCompatActivity() {
                     val arrivalInfoShuttle =
                         apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
 
-
                     // 2. 가져온 값으로 뷰 갱신하기
                     // 2-1-1. 가져온 값으로 24번 도착 시간 항목 갱신
-                    if (!arrivalInfo24.arrivalSoon) {
+                    if (!arrivalInfo24.arrivalSoon && arrivalInfo24.predictTime1.toInt() >= 0) {
                         binding.currentArrivalTime24.text = "${arrivalInfo24.predictTime1} 분"
                         binding.currentArrivalTime24.setTextColor(Color.BLACK)
                         binding.currentArrivalStation24.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("24")) {
-                            busArrivalLayoutGroup.removeViewAt(arrivalSoonBusNowAddedQueue.indexOf("24"))
+                            busArrivalLayoutGroup?.removeViewAt(
+                                arrivalSoonBusNowAddedQueue.indexOf(
+                                    "24"
+                                )
+                            )
                             arrivalSoonBusNowAddedQueue.remove("24")
                         }
 
@@ -153,14 +162,18 @@ class ASideActivity : AppCompatActivity() {
 
                     // 2-2. 가져온 값으로 720-3번 항목 갱신
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (!arrivalInfo720_3.arrivalSoon) {
+                    if (!arrivalInfo720_3.arrivalSoon && arrivalInfo720_3.predictTime1.toInt() >= 0) {
                         binding.currentArrivalTime7203.text = "${arrivalInfo720_3.predictTime1} 분"
                         binding.currentArrivalTime7203.setTextColor(Color.BLACK)
                         binding.currentArrivalStation7203.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("720-3")) {
-                            busArrivalLayoutGroup.removeViewAt(arrivalSoonBusNowAddedQueue.indexOf("720-3"))
+                            busArrivalLayoutGroup?.removeViewAt(
+                                arrivalSoonBusNowAddedQueue.indexOf(
+                                    "720-3"
+                                )
+                            )
                             arrivalSoonBusNowAddedQueue.remove("720-3")
                         }
 
@@ -199,14 +212,18 @@ class ASideActivity : AppCompatActivity() {
 
                     // 2-3. 가져온 값으로 셔틀 항목 갱신
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (!arrivalInfoShuttle.arrivalSoon) {
+                    if (!arrivalInfoShuttle.arrivalSoon && arrivalInfoShuttle.predictTime1.toInt() >= 0) {
                         binding.currentArrivalTimeShuttle.text =
                             "${arrivalInfoShuttle.predictTime1} 분 후 도착 예상"
                         binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
 
                         // 곧도착에 뷰가 있다면 제거
                         if (arrivalSoonBusNowAddedQueue.contains("셔틀")) {
-                            busArrivalLayoutGroup.removeViewAt(arrivalSoonBusNowAddedQueue.indexOf("셔틀"))
+                            busArrivalLayoutGroup?.removeViewAt(
+                                arrivalSoonBusNowAddedQueue.indexOf(
+                                    "셔틀"
+                                )
+                            )
                             arrivalSoonBusNowAddedQueue.remove("셔틀")
                         }
 
@@ -267,11 +284,13 @@ class ASideActivity : AppCompatActivity() {
                             typeface = appFont
                         }
 
-                        busArrivalItemLayout.addView(busArrivalItemView)
-                        busArrivalLayoutGroup.addView(busArrivalItemLayout)
+                        busArrivalItemLayout?.addView(busArrivalItemView)
+                        busArrivalLayoutGroup?.addView(busArrivalItemLayout)
 
                         arrivalSoonBusNowAddedQueue.add(addedBusName)
                     }
+
+//                    arrivalSoonBusNowAddedQueue.add("24")   // debug
 
 
                     // 4. 음성 안내 메시지 출력
@@ -316,22 +335,23 @@ class ASideActivity : AppCompatActivity() {
 
                             mediaPlayer =
                                 MediaPlayer.create(this@ASideActivity, playlist[currentPlayedIndex])
-                            mediaPlayer.setOnCompletionListener {
+
+                            mediaPlayer?.setOnCompletionListener {
                                 if (currentPlayedIndex < playlist.size - 1) {
                                     currentPlayedIndex++
-                                    mediaPlayer.reset()
-                                    mediaPlayer.setDataSource(
+                                    mediaPlayer?.reset()
+                                    mediaPlayer?.setDataSource(
                                         this@ASideActivity,
                                         Uri.parse("android.resource://${packageName}/${playlist[currentPlayedIndex]}")
                                     )
-                                    mediaPlayer.prepare()
-                                    mediaPlayer.start()
+                                    mediaPlayer?.prepare()
+                                    mediaPlayer?.start()
                                 } else {
-                                    mediaPlayer.stop()
-                                    mediaPlayer.release()
+                                    mediaPlayer?.stop()
+                                    mediaPlayer?.release()
                                 }
                             }
-                            mediaPlayer.start()
+                            mediaPlayer?.start()
                         }
                     }
 
@@ -349,6 +369,15 @@ class ASideActivity : AppCompatActivity() {
                         delay(requestRetryTime)
                         continue
                     }
+
+                } catch (e: ErrnoException) {
+                    // API 연결 오류 시 Toast 출력
+                    val toast = Toast(this@ASideActivity)
+                    toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
+                    toast.show()
+
+                    delay(requestRetryTime)
+                    continue
                 }
 
                 // Progressbar 숨기기
@@ -360,11 +389,26 @@ class ASideActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        if (::mediaPlayer.isInitialized) {
-            mediaPlayer.stop()
-            mediaPlayer.release()
+    override fun onPause() {
+        super.onPause()
+
+        pauseMediaPlayerAsync()
+
+        arrivalSoonBusQueue.clear()
+        arrivalSoonBusNowAddedQueue.clear()
+    }
+
+    private fun pauseMediaPlayerAsync() = CoroutineScope(Dispatchers.Main).launch {
+        val mediaPlayerToPause = mediaPlayer // 현재 mediaPlayer 객체를 가져옴
+        mediaPlayer = null // mediaPlayer 객체를 null로 설정하여 재생을 중단함
+
+        if (!isMediaPlayerReleased && mediaPlayerToPause?.isPlaying == true) {
+            mediaPlayerToPause.pause()
         }
-        super.onStop()
+        mediaPlayerToPause?.release()
+        isMediaPlayerReleased = true
+
+        arrivalSoonBusQueue.clear()
+        arrivalSoonBusNowAddedQueue.clear()
     }
 }

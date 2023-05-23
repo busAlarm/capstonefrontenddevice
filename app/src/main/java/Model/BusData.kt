@@ -17,6 +17,7 @@ data class BusData(
     var stationNm1: String,
     var predictTime2: String,
     var stationNm2: String,
+    val isRunning: Boolean,
     var arrivalSoon: Boolean
 ) {
     fun checkArrival(): BusData {
