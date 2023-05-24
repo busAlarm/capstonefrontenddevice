@@ -3,19 +3,24 @@ package com.example.busarrivalalram
 import Utils.DateTimeHandler
 import ViewModel.APIServiceBus
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.Typeface
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.system.ErrnoException
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -26,18 +31,26 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class ASideActivity : AppCompatActivity() {
     val binding by lazy { ActivityAsideBinding.inflate(layoutInflater) }
+
+    // 전원버튼 비활성화 위한 객체
+    private lateinit var wifiBroadcastReceiver: WifiBroadcastReceiver
+
+    // 전원버튼 비활성화 위한 객체
+    private lateinit var powerButtonReceiver: BroadcastReceiver
+    // 볼륨버튼 비활성화 위한 객체
+    private lateinit var volumeButtonReceiver: BroadcastReceiver
 
     // 버스 도착 시간 갱신 주기 (30초)
     val busTimeInterval: Long = 30 * 1000
 
     // 요청 재시도 시간
-    val requestRetryTime: Long = 5000
+    val requestRetryTime: Long = 2500
 
     // 상단 곧도착 노선 뷰에 들어갈 폰트
     private val font = R.font.ibm_plex_sans_kr_medium
@@ -67,6 +80,40 @@ class ASideActivity : AppCompatActivity() {
         // full screen
         window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+
+        // wifi 리시버 등록
+        val wifiFilter = IntentFilter()
+        val wifiReceiver = WifiBroadcastReceiver()
+        wifiFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION)
+        registerReceiver(wifiReceiver, wifiFilter)
+
+        // 전원버튼 동작 비활성화
+        // Power 버튼 이벤트를 가로채는 BroadcastReceiver 등록
+        val powerButtonFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
+        powerButtonReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                // 전원 버튼 이벤트를 무시하고 아무 동작도 수행하지 않음
+                abortBroadcast()
+            }
+        }
+        registerReceiver(powerButtonReceiver, powerButtonFilter)
+
+        // Volume 버튼 이벤트를 가로채는 BroadcastReceiver 등록
+        val volumeButtonFilter = IntentFilter().apply {
+            addAction("android.media.VOLUME_CHANGED_ACTION")
+            priority = IntentFilter.SYSTEM_HIGH_PRIORITY
+        }
+        volumeButtonReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val keyCode = intent?.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1)
+                if (keyCode == AudioManager.STREAM_RING || keyCode == AudioManager.STREAM_MUSIC) {
+                    // 볼륨 버튼 이벤트를 무시하고 아무 동작도 수행하지 않음
+                    abortBroadcast()
+                }
+            }
+        }
+        registerReceiver(volumeButtonReceiver, volumeButtonFilter)
+
 
         // 곧도착 옆 모든 자식 뷰 삭제
         val busArrivalLayoutGroup = binding.arrivalSoonLayout
@@ -369,15 +416,16 @@ class ASideActivity : AppCompatActivity() {
                         delay(requestRetryTime)
                         continue
                     }
+                } catch (e: Exception) {
+                    if (e is ErrnoException) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@ASideActivity)
+                        toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
+                        toast.show()
 
-                } catch (e: ErrnoException) {
-                    // API 연결 오류 시 Toast 출력
-                    val toast = Toast(this@ASideActivity)
-                    toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
-                    toast.show()
-
-                    delay(requestRetryTime)
-                    continue
+                        delay(requestRetryTime)
+                        continue
+                    }
                 }
 
                 // Progressbar 숨기기
@@ -410,5 +458,18 @@ class ASideActivity : AppCompatActivity() {
 
         arrivalSoonBusQueue.clear()
         arrivalSoonBusNowAddedQueue.clear()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // wifi 리시버
+        unregisterReceiver(wifiBroadcastReceiver)
+
+        // 전원버튼 비활성화하는 BroadcastReceiver 등록 해제
+        unregisterReceiver(powerButtonReceiver)
+
+        // 볼륨버튼 비활성화하는 BroadcastReceiver 등록 해제
+        unregisterReceiver(volumeButtonReceiver)
     }
 }

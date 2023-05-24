@@ -7,8 +7,15 @@ import Utils.DateTimeHandler
 import ViewModel.APIServiceBannerMessage
 import ViewModel.APIServiceCampusSchedule
 import ViewModel.APIServiceWeather
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.media.AudioManager
+import android.net.wifi.WifiManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.system.ErrnoException
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -29,6 +36,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class BSideActivity : AppCompatActivity() {
     val binding by lazy { ActivityBsideBinding.inflate(layoutInflater) }
+
+    // 전원버튼 비활성화 위한 객체
+    private lateinit var wifiBroadcastReceiver: WifiBroadcastReceiver
+
+    // 전원버튼 비활성화 위한 객체
+    private lateinit var powerButtonReceiver: BroadcastReceiver
+    // 볼륨버튼 비활성화 위한 객체
+    private lateinit var volumeButtonReceiver: BroadcastReceiver
 
     // 현재 시간 변경 주기 (1초)
     val nowTimeInterval: Long = 1000
@@ -54,6 +69,9 @@ class BSideActivity : AppCompatActivity() {
     // 사용할 폰트
     val font = R.font.ibm_plex_sans_kr_medium
 
+    // 요청 재시도 주기
+    val requestRetryTime: Long = 2500
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -65,6 +83,39 @@ class BSideActivity : AppCompatActivity() {
         // full screen
         window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+
+        // wifi 리시버 등록
+        val wifiFilter = IntentFilter()
+        val wifiReceiver = WifiBroadcastReceiver()
+        wifiFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION)
+        registerReceiver(wifiReceiver, wifiFilter)
+
+        // 전원버튼 동작 비활성화
+        // Power 버튼 이벤트를 가로채는 BroadcastReceiver 등록
+        val powerButtonFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
+        powerButtonReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                // 전원 버튼 이벤트를 무시하고 아무 동작도 수행하지 않음
+                abortBroadcast()
+            }
+        }
+        registerReceiver(powerButtonReceiver, powerButtonFilter)
+
+        // Volume 버튼 이벤트를 가로채는 BroadcastReceiver 등록
+        val volumeButtonFilter = IntentFilter().apply {
+            addAction("android.media.VOLUME_CHANGED_ACTION")
+            priority = IntentFilter.SYSTEM_HIGH_PRIORITY
+        }
+        volumeButtonReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val keyCode = intent?.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1)
+                if (keyCode == AudioManager.STREAM_RING || keyCode == AudioManager.STREAM_MUSIC) {
+                    // 볼륨 버튼 이벤트를 무시하고 아무 동작도 수행하지 않음
+                    abortBroadcast()
+                }
+            }
+        }
+        registerReceiver(volumeButtonReceiver, volumeButtonFilter)
 
         // 1. 상단 배너 - 시간
         CoroutineScope(Dispatchers.Main).launch {
@@ -96,6 +147,19 @@ class BSideActivity : AppCompatActivity() {
                         val toast = Toast(this@BSideActivity)
                         toast.setText("${e.code()}, ${e.message()}")
                         toast.show()
+
+                        delay(requestRetryTime)
+                        continue
+                    }
+                } catch (e: Exception) {
+                    if (e is ErrnoException) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@BSideActivity)
+                        toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
+                        toast.show()
+
+                        delay(requestRetryTime)
+                        continue
                     }
                 }
             }
@@ -153,6 +217,19 @@ class BSideActivity : AppCompatActivity() {
                         val toast = Toast(this@BSideActivity)
                         toast.setText("${e.code()}, ${e.message()}")
                         toast.show()
+
+                        delay(requestRetryTime)
+                        continue
+                    }
+                } catch (e: Exception) {
+                    if (e is ErrnoException) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@BSideActivity)
+                        toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
+                        toast.show()
+
+                        delay(requestRetryTime)
+                        continue
                     }
                 }
             }
@@ -173,8 +250,25 @@ class BSideActivity : AppCompatActivity() {
                     campusSchedule = apiService.getCampusSchedule()
 
                 } catch (e: HttpException) {
-                    val toast = Toast(this@BSideActivity)
-                    toast.setText("${e.code()}, ${e.message()}")
+                    if (e.code() != 200) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@BSideActivity)
+                        toast.setText("${e.code()}, ${e.message()}")
+                        toast.show()
+
+                        delay(requestRetryTime)
+                        continue
+                    }
+                } catch (e: Exception) {
+                    if (e is ErrnoException) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@BSideActivity)
+                        toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
+                        toast.show()
+
+                        delay(requestRetryTime)
+                        continue
+                    }
                 }
 
                 delay(campusScheduleInterval)
@@ -497,5 +591,18 @@ class BSideActivity : AppCompatActivity() {
                 binding.campusScheduleNextMonthLayout.addView(linearLayout)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // wifi 리시버
+        unregisterReceiver(wifiBroadcastReceiver)
+
+        // 전원버튼 비활성화하는 BroadcastReceiver 등록 해제
+        unregisterReceiver(powerButtonReceiver)
+
+        // 볼륨버튼 비활성화하는 BroadcastReceiver 등록 해제
+        unregisterReceiver(volumeButtonReceiver)
     }
 }

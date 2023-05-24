@@ -44,7 +44,7 @@
     <string name="b_side_survey_message">서비스 설문조사에 참여해 주세요!</string>
     <string name="b_side_app_ad_message">학교에서 버스를 자주 탄다면? 이 앱을 써보세요!\n(안드로이드만 가능)</string>
 
-    <string name="version_info">버전 v0.9</string>
+    <string name="version_info">버전 v0.99</string>
     <string name="build_date">빌드일자 2023-05-24</string>
 
 </resources>
