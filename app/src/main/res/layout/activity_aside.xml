@@ -195,8 +195,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/color_arrival_soon"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_top_text"
                     android:textStyle="bold" />
 
@@ -207,7 +206,6 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:text="도착 정보 없음"
-                    android:textColor="@color/black"
                     android:textSize="@dimen/dimen_a_side_down_text"
                     android:textStyle="bold" />
 
@@ -231,8 +229,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/black"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_top_text"
                     android:textStyle="bold" />
 
@@ -242,8 +239,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/black"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_down_text"
                     android:textStyle="bold" />
 
@@ -288,8 +284,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/color_arrival_soon"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_top_text"
                     android:textStyle="bold" />
 
@@ -299,8 +294,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/black"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_down_text"
                     android:textStyle="bold" />
 
@@ -324,8 +318,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/black"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_top_text"
                     android:textStyle="bold" />
 
@@ -335,8 +328,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/black"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_down_text"
                     android:textStyle="bold" />
 
@@ -381,8 +373,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/color_arrival_soon"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_top_text"
                     android:textStyle="bold" />
 
@@ -406,8 +397,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="곧도착"
-                    android:textColor="@color/black"
+                    android:text="도착 정보 없음"
                     android:textSize="@dimen/dimen_a_side_top_text"
                     android:textStyle="bold" />
 

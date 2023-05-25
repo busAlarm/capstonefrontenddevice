@@ -86,9 +86,9 @@ class BSideActivity : AppCompatActivity() {
 
         // wifi 리시버 등록
         val wifiFilter = IntentFilter()
-        val wifiReceiver = WifiBroadcastReceiver()
+        wifiBroadcastReceiver = WifiBroadcastReceiver()
         wifiFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION)
-        registerReceiver(wifiReceiver, wifiFilter)
+        registerReceiver(wifiBroadcastReceiver, wifiFilter)
 
         // 전원버튼 동작 비활성화
         // Power 버튼 이벤트를 가로채는 BroadcastReceiver 등록

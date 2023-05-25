@@ -43,6 +43,7 @@ class ASideActivity : AppCompatActivity() {
 
     // 전원버튼 비활성화 위한 객체
     private lateinit var powerButtonReceiver: BroadcastReceiver
+
     // 볼륨버튼 비활성화 위한 객체
     private lateinit var volumeButtonReceiver: BroadcastReceiver
 
@@ -83,9 +84,9 @@ class ASideActivity : AppCompatActivity() {
 
         // wifi 리시버 등록
         val wifiFilter = IntentFilter()
-        val wifiReceiver = WifiBroadcastReceiver()
+        wifiBroadcastReceiver = WifiBroadcastReceiver()
         wifiFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION)
-        registerReceiver(wifiReceiver, wifiFilter)
+        registerReceiver(wifiBroadcastReceiver, wifiFilter)
 
         // 전원버튼 동작 비활성화
         // Power 버튼 이벤트를 가로채는 BroadcastReceiver 등록
@@ -259,46 +260,47 @@ class ASideActivity : AppCompatActivity() {
 
                     // 2-3. 가져온 값으로 셔틀 항목 갱신
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (!arrivalInfoShuttle.arrivalSoon && arrivalInfoShuttle.predictTime1.toInt() >= 0) {
-                        binding.currentArrivalTimeShuttle.text =
-                            "${arrivalInfoShuttle.predictTime1} 분 후 도착 예상"
-                        binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
+                    if (arrivalInfoShuttle.isRunning) {
+                        if (!arrivalInfoShuttle.arrivalSoon && arrivalInfoShuttle.predictTime1.toInt() >= 0) {
+                            binding.currentArrivalTimeShuttle.text =
+                                "${arrivalInfoShuttle.predictTime1} 분 후 도착 예상"
+                            binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
 
-                        // 곧도착에 뷰가 있다면 제거
-                        if (arrivalSoonBusNowAddedQueue.contains("셔틀")) {
-                            busArrivalLayoutGroup?.removeViewAt(
-                                arrivalSoonBusNowAddedQueue.indexOf(
-                                    "셔틀"
+                            // 곧도착에 뷰가 있다면 제거
+                            if (arrivalSoonBusNowAddedQueue.contains("셔틀")) {
+                                busArrivalLayoutGroup?.removeViewAt(
+                                    arrivalSoonBusNowAddedQueue.indexOf(
+                                        "셔틀"
+                                    )
+                                )
+                                arrivalSoonBusNowAddedQueue.remove("셔틀")
+                            }
+
+                        } else if (arrivalInfoShuttle.predictTime1.toInt() >= 0) {
+                            binding.currentArrivalTimeShuttle.text = "곧도착 예상"
+                            binding.currentArrivalTimeShuttle.setTextColor(
+                                ContextCompat.getColor(
+                                    this@ASideActivity, R.color.color_arrival_soon
                                 )
                             )
-                            arrivalSoonBusNowAddedQueue.remove("셔틀")
+
+                            // 뷰에 추가되지 않았을 때에만 뷰 생성할 목록에 추가
+                            if (!arrivalSoonBusNowAddedQueue.contains("셔틀")) {
+                                arrivalSoonBusQueue.add("셔틀")
+                            }
                         }
 
-                    } else if (arrivalInfoShuttle.predictTime1.toInt() >= 0) {
-                        binding.currentArrivalTimeShuttle.text = "곧도착 예상"
-                        binding.currentArrivalTimeShuttle.setTextColor(
-                            ContextCompat.getColor(
-                                this@ASideActivity, R.color.color_arrival_soon
-                            )
-                        )
-
-                        // 뷰에 추가되지 않았을 때에만 뷰 생성할 목록에 추가
-                        if (!arrivalSoonBusNowAddedQueue.contains("셔틀")) {
-                            arrivalSoonBusQueue.add("셔틀")
+                        if (arrivalInfoShuttle.predictTime2.toInt() >= 0) {
+                            binding.nextArrivalTimeShuttle.text =
+                                "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
+                            binding.nextArrivalTimeShuttle.setTextColor(Color.BLACK)
+                        } else {
+                            binding.nextArrivalTimeShuttle.text = "도착 정보 없음"
+                            binding.nextArrivalTimeShuttle.setTextColor(Color.GRAY)
                         }
-
                     } else {
                         binding.currentArrivalTimeShuttle.text = "도착 정보 없음"
                         binding.currentArrivalTimeShuttle.setTextColor(Color.GRAY)
-                    }
-
-                    if (arrivalInfoShuttle.predictTime2.toInt() >= 0) {
-                        binding.nextArrivalTimeShuttle.text =
-                            "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
-                        binding.nextArrivalTimeShuttle.setTextColor(Color.BLACK)
-                    } else {
-                        binding.nextArrivalTimeShuttle.text = "도착 정보 없음"
-                        binding.nextArrivalTimeShuttle.setTextColor(Color.GRAY)
                     }
 
 
