@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.system.ErrnoException
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -316,6 +317,11 @@ class BSideActivity : AppCompatActivity() {
                 delay(campusScheduleViewChangeInterval)
             }
         }
+    }
+
+    // 액티비티 실행되는 동안 터치 이벤트 소비
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return true
     }
 
     private fun createFirstThisMonthView() {

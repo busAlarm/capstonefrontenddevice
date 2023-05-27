@@ -174,7 +174,7 @@
                 android:gravity="center"
                 android:text="24"
                 android:textColor="@color/color_24"
-                android:textSize="40sp"
+                android:textSize="@dimen/dimen_a_side_top_text"
                 android:textStyle="bold" />
 
             <ImageView
@@ -263,7 +263,7 @@
                 android:gravity="center"
                 android:text="720-3"
                 android:textColor="@color/color_720_3"
-                android:textSize="40sp"
+                android:textSize="@dimen/dimen_a_side_top_text"
                 android:textStyle="bold" />
 
             <ImageView
@@ -352,7 +352,7 @@
                 android:gravity="center"
                 android:text="셔틀"
                 android:textColor="@color/color_shuttle"
-                android:textSize="40sp"
+                android:textSize="@dimen/dimen_a_side_top_text"
                 android:textStyle="bold" />
 
             <ImageView

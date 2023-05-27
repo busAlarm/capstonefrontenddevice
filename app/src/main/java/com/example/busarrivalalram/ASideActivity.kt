@@ -16,6 +16,7 @@ import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.system.ErrnoException
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -182,6 +183,7 @@ class ASideActivity : AppCompatActivity() {
                                 this@ASideActivity, R.color.color_arrival_soon
                             )
                         )
+                        binding.currentArrivalStation24.setTextColor(Color.BLACK)
 
                         // 뷰에 추가되지 않았을 때에만 뷰 생성할 목록에 추가
                         if (!arrivalSoonBusNowAddedQueue.contains("24")) {
@@ -232,6 +234,7 @@ class ASideActivity : AppCompatActivity() {
                                 this@ASideActivity, R.color.color_arrival_soon
                             )
                         )
+                        binding.currentArrivalStation7203.setTextColor(Color.BLACK)
 
                         // 뷰에 추가되지 않았을 때에만 뷰 생성할 목록에 추가
                         if (!arrivalSoonBusNowAddedQueue.contains("720-3")) {
@@ -313,7 +316,7 @@ class ASideActivity : AppCompatActivity() {
 
                         var busArrivalItemLayout = LinearLayout(this@ASideActivity).apply {
                             layoutParams = LinearLayout.LayoutParams(
-                                resources.getDimensionPixelSize(R.dimen.dimen_220dp),
+                                resources.getDimensionPixelSize(R.dimen.dimen_240dp),
                                 resources.getDimensionPixelSize(R.dimen.dimen_140dp)
                             ).apply {
                                 marginStart = resources.getDimensionPixelSize(R.dimen.dimen_20dp)
@@ -325,7 +328,8 @@ class ASideActivity : AppCompatActivity() {
 
                         var busArrivalItemView = TextView(this@ASideActivity).apply {
                             text = addedBusName
-                            textSize = 60F
+                            textSize = 70F
+                            gravity = Gravity.CENTER
                             setTextColor(Color.BLACK)
                             setTypeface(typeface, Typeface.BOLD)
 
@@ -437,6 +441,11 @@ class ASideActivity : AppCompatActivity() {
                 delay(busTimeInterval)
             }
         }
+    }
+
+    // 액티비티 실행되는 동안 터치 이벤트 소비
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return true
     }
 
     override fun onPause() {
