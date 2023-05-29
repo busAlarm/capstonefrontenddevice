@@ -11,6 +11,8 @@ package Model
 * */
 
 data class BusData(
+    val routeId: String,
+    val timeStamp: String,
     val firstTime: String,
     val lastTime: String,
     var predictTime1: String,

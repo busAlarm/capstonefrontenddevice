@@ -1,5 +1,6 @@
 package com.example.busarrivalalram
 
+import Model.BusData
 import Model.DateTime
 import Model.DeviceStatus
 import Utils.DateTimeHandler
@@ -36,12 +37,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.content.res.ResourcesCompat
 import com.example.busarrivalalram.databinding.ActivityAsideBinding
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.HttpException
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -76,6 +82,11 @@ class ASideActivity : AppCompatActivity() {
 
     // 현재 뷰에 추가된 버스 목록 큐
     val arrivalSoonBusNowAddedQueue: ArrayDeque<String> = ArrayDeque()
+
+    // 버스 노선별 도착 데이터
+    var arrivalInfo24: BusData? = null
+    var arrivalInfo720_3: BusData? = null
+    var arrivalInfoShuttle: BusData? = null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -161,15 +172,14 @@ class ASideActivity : AppCompatActivity() {
 
                     val apiServiceBus = retrofit.create(APIServiceBus::class.java)
 
-                    val arrivalInfo24 = apiServiceBus.getBusArrivalInfo("24").checkArrival()
-                    val arrivalInfo720_3 = apiServiceBus.getBusArrivalInfo("720-3").checkArrival()
-                    val arrivalInfoShuttle =
-                        apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
+                    arrivalInfo24 = apiServiceBus.getBusArrivalInfo("24").checkArrival()
+                    arrivalInfo720_3 = apiServiceBus.getBusArrivalInfo("720-3").checkArrival()
+                    arrivalInfoShuttle = apiServiceBus.getBusArrivalInfo("shuttle").checkArrival()
 
                     // 2. 가져온 값으로 뷰 갱신하기
                     // 2-1-1. 가져온 값으로 24번 도착 시간 항목 갱신
-                    if (!arrivalInfo24.arrivalSoon && arrivalInfo24.predictTime1.toInt() >= 0) {
-                        binding.currentArrivalTime24.text = "${arrivalInfo24.predictTime1} 분"
+                    if (!arrivalInfo24!!.arrivalSoon && arrivalInfo24!!.predictTime1.toInt() >= 0) {
+                        binding.currentArrivalTime24.text = "${arrivalInfo24!!.predictTime1} 분"
                         binding.currentArrivalTime24.setTextColor(Color.BLACK)
                         binding.currentArrivalStation24.setTextColor(Color.BLACK)
 
@@ -183,7 +193,7 @@ class ASideActivity : AppCompatActivity() {
                             arrivalSoonBusNowAddedQueue.remove("24")
                         }
 
-                    } else if (arrivalInfo24.predictTime1.toInt() >= 0) {
+                    } else if (arrivalInfo24!!.predictTime1.toInt() >= 0) {
                         // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
                         binding.currentArrivalTime24.text = "곧도착"
                         binding.currentArrivalTime24.setTextColor(
@@ -204,8 +214,8 @@ class ASideActivity : AppCompatActivity() {
                         binding.currentArrivalStation24.setTextColor(Color.GRAY)
                     }
 
-                    if (arrivalInfo24.predictTime2.toInt() >= 0) {
-                        binding.nextArrivalTime24.text = "${arrivalInfo24.predictTime2} 분"
+                    if (arrivalInfo24!!.predictTime2.toInt() >= 0) {
+                        binding.nextArrivalTime24.text = "${arrivalInfo24!!.predictTime2} 분"
                         binding.nextArrivalTime24.setTextColor(Color.BLACK)
                         binding.nextArrivalStation24.setTextColor(Color.BLACK)
                     } else {
@@ -214,14 +224,14 @@ class ASideActivity : AppCompatActivity() {
                         binding.nextArrivalStation24.setTextColor(Color.GRAY)
                     }
 
-                    binding.currentArrivalStation24.text = arrivalInfo24.stationNm1
-                    binding.nextArrivalStation24.text = arrivalInfo24.stationNm2
+                    binding.currentArrivalStation24.text = arrivalInfo24!!.stationNm1
+                    binding.nextArrivalStation24.text = arrivalInfo24!!.stationNm2
 
 
                     // 2-2. 가져온 값으로 720-3번 항목 갱신
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (!arrivalInfo720_3.arrivalSoon && arrivalInfo720_3.predictTime1.toInt() >= 0) {
-                        binding.currentArrivalTime7203.text = "${arrivalInfo720_3.predictTime1} 분"
+                    if (!arrivalInfo720_3!!.arrivalSoon && arrivalInfo720_3!!.predictTime1.toInt() >= 0) {
+                        binding.currentArrivalTime7203.text = "${arrivalInfo720_3!!.predictTime1} 분"
                         binding.currentArrivalTime7203.setTextColor(Color.BLACK)
                         binding.currentArrivalStation7203.setTextColor(Color.BLACK)
 
@@ -235,7 +245,7 @@ class ASideActivity : AppCompatActivity() {
                             arrivalSoonBusNowAddedQueue.remove("720-3")
                         }
 
-                    } else if (arrivalInfo720_3.predictTime1.toInt() >= 0) {
+                    } else if (arrivalInfo720_3!!.predictTime1.toInt() >= 0) {
                         binding.currentArrivalTime7203.text = "곧도착"
                         binding.currentArrivalTime7203.setTextColor(
                             ContextCompat.getColor(
@@ -255,8 +265,8 @@ class ASideActivity : AppCompatActivity() {
                         binding.currentArrivalStation7203.setTextColor(Color.GRAY)
                     }
 
-                    if (arrivalInfo720_3.predictTime2.toInt() >= 0) {
-                        binding.nextArrivalTime7203.text = "${arrivalInfo720_3.predictTime2} 분"
+                    if (arrivalInfo720_3!!.predictTime2.toInt() >= 0) {
+                        binding.nextArrivalTime7203.text = "${arrivalInfo720_3!!.predictTime2} 분"
                         binding.nextArrivalTime7203.setTextColor(Color.BLACK)
                         binding.nextArrivalStation7203.setTextColor(Color.BLACK)
                     } else {
@@ -265,16 +275,16 @@ class ASideActivity : AppCompatActivity() {
                         binding.nextArrivalStation7203.setTextColor(Color.GRAY)
                     }
 
-                    binding.currentArrivalStation7203.text = arrivalInfo720_3.stationNm1
-                    binding.nextArrivalStation7203.text = arrivalInfo720_3.stationNm2
+                    binding.currentArrivalStation7203.text = arrivalInfo720_3!!.stationNm1
+                    binding.nextArrivalStation7203.text = arrivalInfo720_3!!.stationNm2
 
 
                     // 2-3. 가져온 값으로 셔틀 항목 갱신
                     // 남은 시간이 2분 이하일 때, 곧도착으로 남은 시간 변경
-                    if (arrivalInfoShuttle.isRunning) {
-                        if (!arrivalInfoShuttle.arrivalSoon && arrivalInfoShuttle.predictTime1.toInt() >= 0) {
+                    if (arrivalInfoShuttle!!.isRunning) {
+                        if (!arrivalInfoShuttle!!.arrivalSoon && arrivalInfoShuttle!!.predictTime1.toInt() >= 0) {
                             binding.currentArrivalTimeShuttle.text =
-                                "${arrivalInfoShuttle.predictTime1} 분 후 도착 예상"
+                                "${arrivalInfoShuttle!!.predictTime1} 분 후 도착 예상"
                             binding.currentArrivalTimeShuttle.setTextColor(Color.BLACK)
 
                             // 곧도착에 뷰가 있다면 제거
@@ -287,7 +297,7 @@ class ASideActivity : AppCompatActivity() {
                                 arrivalSoonBusNowAddedQueue.remove("셔틀")
                             }
 
-                        } else if (arrivalInfoShuttle.predictTime1.toInt() >= 0) {
+                        } else if (arrivalInfoShuttle!!.predictTime1.toInt() >= 0) {
                             binding.currentArrivalTimeShuttle.text = "곧도착 예상"
                             binding.currentArrivalTimeShuttle.setTextColor(
                                 ContextCompat.getColor(
@@ -301,9 +311,9 @@ class ASideActivity : AppCompatActivity() {
                             }
                         }
 
-                        if (arrivalInfoShuttle.predictTime2.toInt() >= 0) {
+                        if (arrivalInfoShuttle!!.predictTime2.toInt() >= 0) {
                             binding.nextArrivalTimeShuttle.text =
-                                "${arrivalInfoShuttle.predictTime2} 분 후 도착 예상"
+                                "${arrivalInfoShuttle!!.predictTime2} 분 후 도착 예상"
                             binding.nextArrivalTimeShuttle.setTextColor(Color.BLACK)
                         } else {
                             binding.nextArrivalTimeShuttle.text = "도착 정보 없음"
@@ -368,8 +378,7 @@ class ASideActivity : AppCompatActivity() {
                                     "24" -> {
                                         playlist = playlist.plus(
                                             arrayOf(
-                                                R.raw.korean_24,
-                                                R.raw.english_24
+                                                R.raw.korean_24, R.raw.english_24
                                             )
                                         )
                                     }
@@ -377,8 +386,7 @@ class ASideActivity : AppCompatActivity() {
                                     "720-3" -> {
                                         playlist = playlist.plus(
                                             arrayOf(
-                                                R.raw.korean_720_3,
-                                                R.raw.english_720_3
+                                                R.raw.korean_720_3, R.raw.english_720_3
                                             )
                                         )
                                     }
@@ -386,8 +394,7 @@ class ASideActivity : AppCompatActivity() {
                                     "셔틀" -> {
                                         playlist = playlist.plus(
                                             arrayOf(
-                                                R.raw.korean_shuttle,
-                                                R.raw.english_shuttle
+                                                R.raw.korean_shuttle, R.raw.english_shuttle
                                             )
                                         )
                                     }
@@ -450,6 +457,71 @@ class ASideActivity : AppCompatActivity() {
             }
         }
 
+        CoroutineScope(Dispatchers.Main).launch {
+            // TO DO: 서버 주소 변경
+            val retrofit = Retrofit.Builder().baseUrl("http://43.201.109.211:8080/api/")
+                .addConverterFactory(GsonConverterFactory.create()).build()
+            val apiServiceBus = retrofit.create(APIServiceBus::class.java)
+
+            while (true) {
+                try {
+                    if (arrivalInfo24 != null) {
+                        Log.d("busData24", arrivalInfo24!!.toString())
+                        val call = apiServiceBus.postBusArrivalInfo(arrivalInfo24!!)
+                        val response = call.execute()
+                        if (response.isSuccessful) {
+                            Log.d("response24", "success")
+                        } else {
+                            Log.d("response24", "failure: ${response.message()}")
+                        }
+
+                        Log.d("response24", response.toString())
+                    }
+
+                    if (arrivalInfo720_3 != null) {
+                        Log.d("busData7203", arrivalInfo720_3!!.toString())
+                        val call = apiServiceBus.postBusArrivalInfo(arrivalInfo720_3!!)
+                        val response = call.execute()
+                        Log.d("response720_3", response.toString())
+                    }
+
+                    if (arrivalInfoShuttle != null) {
+                        Log.d("busDataShuttle", arrivalInfoShuttle!!.toString())
+                        val call = apiServiceBus.postBusArrivalInfo(arrivalInfoShuttle!!)
+                        val response = call.execute()
+                        Log.d("responseShuttle", response.toString())
+                    }
+
+                } catch (e: HttpException) {
+                    if (e.code() != 200) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@ASideActivity)
+                        toast.setText("${e.code()}, ${e.message()}")
+                        toast.show()
+
+                        Log.d("response_exception", e.toString())
+
+                        delay(requestRetryTime)
+                        continue
+                    }
+                } catch (e: Exception) {
+                    if (e is ErrnoException) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@ASideActivity)
+                        toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
+                        toast.show()
+
+                        Log.d("response_exception", e.toString())
+
+                        delay(requestRetryTime)
+                        continue
+                    }
+                }
+
+                delay(busTimeInterval)
+            }
+        }
+
         // 기기 상태 정보 전달
         CoroutineScope(Dispatchers.Main).launch {
             val contentResolver: ContentResolver = getContentResolver() // for brightness
@@ -458,9 +530,7 @@ class ASideActivity : AppCompatActivity() {
             val batteryManager: BatteryManager =
                 applicationContext.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
 
-            // TO DO: Retrofit 객체 생성
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://busarrivalalrammonitor-default-rtdb.firebaseio.com/")
+            val retrofit = Retrofit.Builder().baseUrl("http://43.201.109.211:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             val apiServiceDeviceStatus = retrofit.create(APIServiceDeviceStatus::class.java)
 
@@ -468,7 +538,9 @@ class ASideActivity : AppCompatActivity() {
                 try {
                     val wifiInfo: WifiInfo = wifiManager.connectionInfo
                     val ssid: String = wifiInfo.ssid
-                    val brightness: Int = (Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS) / 255.0 * 100).toInt()
+                    val brightness: Int = (Settings.System.getInt(
+                        contentResolver, Settings.System.SCREEN_BRIGHTNESS
+                    ) / 255.0 * 100).toInt()
                     val signalPower: Int = wifiInfo.rssi
                     val batteryPercent: Int =
                         batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
@@ -485,16 +557,13 @@ class ASideActivity : AppCompatActivity() {
                         "$signalPower",
                         "$batteryPercent",
                         "$batteryAmpere",
-                        "[$timeStamp]: Connected to $ssid / " +
-                                "Brightness ${brightness}% / " +
-                                "Current signal power: ${signalPower}dBm / " +
-                                "Current battery percent: ${batteryPercent}% / " +
-                                "Current battery ampere: ${batteryAmpere}mAh"
+                        "[$timeStamp]: Connected to $ssid / " + "Brightness ${brightness}% / " + "Current signal power: ${signalPower}dBm / " + "Current battery percent: ${batteryPercent}% / " + "Current battery ampere: ${batteryAmpere}mAh"
                     )
 
                     Log.d("deviceA", deviceStatus.logMessage)
-
-                    apiServiceDeviceStatus.postDeviceStatus(deviceStatus)
+                    val call = apiServiceDeviceStatus.postDeviceStatus(deviceStatus)
+                    val response = call.execute()
+                    Log.d("responseDevice", response.toString())
 
                 } catch (e: HttpException) {
                     if (e.code() != 200) {
@@ -531,7 +600,7 @@ class ASideActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        pauseMediaPlayerAsync()
+//        pauseMediaPlayerAsync()
 
         arrivalSoonBusQueue.clear()
         arrivalSoonBusNowAddedQueue.clear()
@@ -546,9 +615,6 @@ class ASideActivity : AppCompatActivity() {
         }
         mediaPlayerToPause?.release()
         isMediaPlayerReleased = true
-
-        arrivalSoonBusQueue.clear()
-        arrivalSoonBusNowAddedQueue.clear()
     }
 
     override fun onDestroy() {

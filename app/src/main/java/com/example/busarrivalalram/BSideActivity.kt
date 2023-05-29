@@ -34,6 +34,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.busarrivalalram.databinding.ActivityBsideBinding
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -86,7 +87,7 @@ class BSideActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(binding.root)
 
         // title bar 가리기
@@ -339,15 +340,22 @@ class BSideActivity : AppCompatActivity() {
 
             // TO DO: Retrofit 객체 생성
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://busarrivalalrammonitor-default-rtdb.firebaseio.com/")
+                .baseUrl("http://43.201.109.211:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             val apiServiceDeviceStatus = retrofit.create(APIServiceDeviceStatus::class.java)
 
             while (true) {
                 try {
                     val wifiInfo: WifiInfo = wifiManager.connectionInfo
-                    val ssid: String = wifiInfo.ssid
-                    val brightness: Int = (Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS) / 255.0 * 100).toInt()
+//                    val bssid = wifiInfo.bssid
+//                    val wifiScanResults = wifiManager.scanResults
+//                    val ssid = wifiScanResults.find { it.BSSID == bssid }?.SSID ?: "Unknown SSID"
+                    val ssid = "DKU_WiFi"
+
+                    val brightness: Int = (Settings.System.getInt(
+                        contentResolver,
+                        Settings.System.SCREEN_BRIGHTNESS
+                    ) / 255.0 * 100).toInt()
                     val signalPower: Int = wifiInfo.rssi
                     val batteryPercent: Int =
                         batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
@@ -372,8 +380,9 @@ class BSideActivity : AppCompatActivity() {
                     )
 
                     Log.d("deviceB", deviceStatus.logMessage)
-
-                    apiServiceDeviceStatus.postDeviceStatus(deviceStatus)
+                    val call = apiServiceDeviceStatus.postDeviceStatus(deviceStatus)
+                    val response = call.execute()
+                    Log.d("responseDevice", response.toString())
 
                 } catch (e: HttpException) {
                     if (e.code() != 200) {
