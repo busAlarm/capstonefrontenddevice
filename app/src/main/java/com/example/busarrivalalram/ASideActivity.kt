@@ -1,9 +1,14 @@
 package com.example.busarrivalalram
 
+import Model.DateTime
+import Model.DeviceStatus
 import Utils.DateTimeHandler
 import ViewModel.APIServiceBus
+import ViewModel.APIServiceDeviceStatus
 import android.annotation.SuppressLint
+import android.app.ApplicationErrorReport.BatteryInfo
 import android.content.BroadcastReceiver
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -12,9 +17,13 @@ import android.graphics.Typeface
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
+import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
+import android.os.BatteryManager
 import android.os.Bundle
+import android.provider.Settings
 import android.system.ErrnoException
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -24,6 +33,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.core.content.res.ResourcesCompat
 import com.example.busarrivalalram.databinding.ActivityAsideBinding
 import kotlinx.coroutines.CoroutineScope
@@ -139,8 +149,6 @@ class ASideActivity : AppCompatActivity() {
         // GlobalScope에서 돌아가는 코드는 백그라운드 스레드에서 돌아가는 코드다.
         // 따라서, 뷰를 건드리는 코드를 GlobalScope 안에 넣으면 안 된다.
         CoroutineScope(Dispatchers.Main).launch {
-
-
             while (true) {
                 try {
                     // Progressbar 보이기
@@ -438,6 +446,78 @@ class ASideActivity : AppCompatActivity() {
                 binding.progressCircular.visibility = View.GONE
 
                 // 다음 요청 시간까지 대기
+                delay(busTimeInterval)
+            }
+        }
+
+        // 기기 상태 정보 전달
+        CoroutineScope(Dispatchers.Main).launch {
+            val contentResolver: ContentResolver = getContentResolver() // for brightness
+            val wifiManager: WifiManager =
+                applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val batteryManager: BatteryManager =
+                applicationContext.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+
+            // TO DO: Retrofit 객체 생성
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://busarrivalalrammonitor-default-rtdb.firebaseio.com/")
+                .addConverterFactory(GsonConverterFactory.create()).build()
+            val apiServiceDeviceStatus = retrofit.create(APIServiceDeviceStatus::class.java)
+
+            while (true) {
+                try {
+                    val wifiInfo: WifiInfo = wifiManager.connectionInfo
+                    val ssid: String = wifiInfo.ssid
+                    val brightness: Int = (Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS) / 255.0 * 100).toInt()
+                    val signalPower: Int = wifiInfo.rssi
+                    val batteryPercent: Int =
+                        batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+                    val batteryAmpere: Int =
+                        batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER) / 1000
+                    val timeStamp: String = DateTimeHandler.getCurrentTimeStamp()
+
+                    // 서버에 상태값 전달
+                    val deviceStatus = DeviceStatus(
+                        "A",
+                        timeStamp,
+                        ssid,
+                        "$brightness",
+                        "$signalPower",
+                        "$batteryPercent",
+                        "$batteryAmpere",
+                        "[$timeStamp]: Connected to $ssid / " +
+                                "Brightness ${brightness}% / " +
+                                "Current signal power: ${signalPower}dBm / " +
+                                "Current battery percent: ${batteryPercent}% / " +
+                                "Current battery ampere: ${batteryAmpere}mAh"
+                    )
+
+                    Log.d("deviceA", deviceStatus.logMessage)
+
+                    apiServiceDeviceStatus.postDeviceStatus(deviceStatus)
+
+                } catch (e: HttpException) {
+                    if (e.code() != 200) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@ASideActivity)
+                        toast.setText("${e.code()}, ${e.message()}")
+                        toast.show()
+
+                        delay(requestRetryTime)
+                        continue
+                    }
+                } catch (e: Exception) {
+                    if (e is ErrnoException) {
+                        // API 연결 오류 시 Toast 출력
+                        val toast = Toast(this@ASideActivity)
+                        toast.setText("네트워크 연결이 끊어졌습니다. 잠시 기다리세요...")
+                        toast.show()
+
+                        delay(requestRetryTime)
+                        continue
+                    }
+                }
+
                 delay(busTimeInterval)
             }
         }

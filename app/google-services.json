@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "16582216303",
+    "project_id": "busarrivalalrammonitor",
+    "storage_bucket": "busarrivalalrammonitor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16582216303:android:5fc4227970c083a5045b9a",
+        "android_client_info": {
+          "package_name": "com.example.busarrivalalram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr8Bj1vCBfPTS11iCJyrE-_Ox4cglRXjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
