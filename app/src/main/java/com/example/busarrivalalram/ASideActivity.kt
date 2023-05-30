@@ -600,7 +600,7 @@ class ASideActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-//        pauseMediaPlayerAsync()
+        pauseMediaPlayerAsync()
 
         arrivalSoonBusQueue.clear()
         arrivalSoonBusNowAddedQueue.clear()
@@ -610,11 +610,13 @@ class ASideActivity : AppCompatActivity() {
         val mediaPlayerToPause = mediaPlayer // 현재 mediaPlayer 객체를 가져옴
         mediaPlayer = null // mediaPlayer 객체를 null로 설정하여 재생을 중단함
 
-        if (!isMediaPlayerReleased && mediaPlayerToPause?.isPlaying == true) {
-            mediaPlayerToPause.pause()
+        if (mediaPlayerToPause != null) {
+            if (!isMediaPlayerReleased && mediaPlayerToPause.isPlaying) {
+                mediaPlayerToPause.pause()
+            }
+            mediaPlayerToPause.release()
+            isMediaPlayerReleased = true
         }
-        mediaPlayerToPause?.release()
-        isMediaPlayerReleased = true
     }
 
     override fun onDestroy() {
