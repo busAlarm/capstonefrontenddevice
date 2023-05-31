@@ -50,6 +50,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Queue
 
 
 class ASideActivity : AppCompatActivity() {
@@ -82,6 +83,11 @@ class ASideActivity : AppCompatActivity() {
 
     // 현재 뷰에 추가된 버스 목록 큐
     val arrivalSoonBusNowAddedQueue: ArrayDeque<String> = ArrayDeque()
+
+    // 음성으로 안내된 버스 목록 큐
+    // 음성으로 안내되어 있으면 여기에 들어간다.
+    // 요청때마다 리셋된다.
+    val announcedBusQueue: ArrayDeque<String> = ArrayDeque()
 
     // 버스 노선별 도착 데이터
     var arrivalInfo24: BusData? = null
@@ -391,12 +397,14 @@ class ASideActivity : AppCompatActivity() {
                         arrivalSoonBusNowAddedQueue.add(addedBusName)
                     }
 
-//                    arrivalSoonBusNowAddedQueue.add("24")   // debug
-
 
                     // 4. 음성 안내 메시지 출력
                     // TTS 음성 구할 것 (한국어, 영어)
                     // 한국어 -> 영어 순으로 출력
+
+                    // 음성 안내한 노선 큐 비우고
+                    announcedBusQueue.clear()
+
                     if (arrivalSoonBusNowAddedQueue.isNotEmpty()) {
                         withContext(Dispatchers.IO) {
                             var playlist: Array<Int> = arrayOf()
@@ -406,27 +414,36 @@ class ASideActivity : AppCompatActivity() {
                             for (arrival in arrivalSoonBusNowAddedQueue) {
                                 when (arrival) {
                                     "24" -> {
-                                        playlist = playlist.plus(
-                                            arrayOf(
-                                                R.raw.korean_24, R.raw.english_24
+                                        if (!announcedBusQueue.contains("24")) {
+                                            playlist = playlist.plus(
+                                                arrayOf(
+                                                    R.raw.korean_24, R.raw.english_24
+                                                )
                                             )
-                                        )
+                                            announcedBusQueue.add("24")
+                                        }
                                     }
 
                                     "720-3" -> {
-                                        playlist = playlist.plus(
-                                            arrayOf(
-                                                R.raw.korean_720_3, R.raw.english_720_3
+                                        if (!announcedBusQueue.contains("720-3")) {
+                                            playlist = playlist.plus(
+                                                arrayOf(
+                                                    R.raw.korean_720_3, R.raw.english_720_3
+                                                )
                                             )
-                                        )
+                                            announcedBusQueue.add("720-3")
+                                        }
                                     }
 
                                     "셔틀" -> {
-                                        playlist = playlist.plus(
-                                            arrayOf(
-                                                R.raw.korean_shuttle, R.raw.english_shuttle
+                                        if (!announcedBusQueue.contains("셔틀")) {
+                                            playlist = playlist.plus(
+                                                arrayOf(
+                                                    R.raw.korean_shuttle, R.raw.english_shuttle
+                                                )
                                             )
-                                        )
+                                            announcedBusQueue.add("셔틀")
+                                        }
                                     }
                                 }
                             }
