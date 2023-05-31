@@ -212,6 +212,16 @@ class ASideActivity : AppCompatActivity() {
                         binding.currentArrivalTime24.text = "도착 정보 없음"
                         binding.currentArrivalTime24.setTextColor(Color.GRAY)
                         binding.currentArrivalStation24.setTextColor(Color.GRAY)
+
+                        // 곧도착에 뷰가 있다면 제거
+                        if (arrivalSoonBusNowAddedQueue.contains("24")) {
+                            busArrivalLayoutGroup?.removeViewAt(
+                                arrivalSoonBusNowAddedQueue.indexOf(
+                                    "24"
+                                )
+                            )
+                            arrivalSoonBusNowAddedQueue.remove("24")
+                        }
                     }
 
                     if (arrivalInfo24!!.predictTime2.toInt() >= 0) {
@@ -263,6 +273,16 @@ class ASideActivity : AppCompatActivity() {
                         binding.currentArrivalTime7203.text = "도착 정보 없음"
                         binding.currentArrivalTime7203.setTextColor(Color.GRAY)
                         binding.currentArrivalStation7203.setTextColor(Color.GRAY)
+
+                        // 곧도착에 뷰가 있다면 제거
+                        if (arrivalSoonBusNowAddedQueue.contains("720-3")) {
+                            busArrivalLayoutGroup?.removeViewAt(
+                                arrivalSoonBusNowAddedQueue.indexOf(
+                                    "720-3"
+                                )
+                            )
+                            arrivalSoonBusNowAddedQueue.remove("720-3")
+                        }
                     }
 
                     if (arrivalInfo720_3!!.predictTime2.toInt() >= 0) {
@@ -322,6 +342,16 @@ class ASideActivity : AppCompatActivity() {
                     } else {
                         binding.currentArrivalTimeShuttle.text = "도착 정보 없음"
                         binding.currentArrivalTimeShuttle.setTextColor(Color.GRAY)
+
+                        // 곧도착에 뷰가 있다면 제거
+                        if (arrivalSoonBusNowAddedQueue.contains("셔틀")) {
+                            busArrivalLayoutGroup?.removeViewAt(
+                                arrivalSoonBusNowAddedQueue.indexOf(
+                                    "셔틀"
+                                )
+                            )
+                            arrivalSoonBusNowAddedQueue.remove("셔틀")
+                        }
                     }
 
 
